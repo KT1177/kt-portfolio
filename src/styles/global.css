@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@theme { --color-ink: #182222; --color-paper: #f8faf9; --color-accent: #136c53; --font-sans: "Helvetica Neue", Arial, sans-serif; }
+@layer base {
+  body { @apply bg-paper text-ink font-sans antialiased; }
+  a, button { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent; }
+  ::selection { @apply bg-accent text-white; }
+}

@@ -1,0 +1,8 @@
+---
+import { mediaUrl } from '../../lib/media';
+import type { MediaAsset } from '../../data/media';
+interface Props { asset?: MediaAsset; class?: string; }
+const { asset, class: className } = Astro.props;
+const src = asset ? mediaUrl(asset.key) : undefined;
+---
+{src && asset ? <img src={src} alt={asset.alt} width={asset.width} height={asset.height} loading="lazy" decoding="async" class:list={["h-auto w-full", className]} /> : <div class:list={["flex aspect-video items-center justify-center bg-ink/5 text-sm text-ink/60", className]} role="img" aria-label={asset?.alt || 'Project image coming soon'}>Image coming soon</div>}

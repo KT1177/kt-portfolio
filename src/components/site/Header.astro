@@ -1,0 +1,13 @@
+---
+import Container from '../ui/Container.astro';
+import { navigation } from '../../data/navigation';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="border-b border-ink/15 py-6">
+  <Container class="flex flex-wrap items-center justify-between gap-6">
+    <a href="/" class="text-2xl font-semibold tracking-tight" aria-label="KT Portfolio home">KT<span class="text-accent">.</span></a>
+    <nav aria-label="Main navigation" class="flex flex-wrap gap-5 text-sm sm:gap-8">
+      {navigation.map(({ href, label }) => <a href={href} aria-current={path === (href.replace(/\/$/, '') || '/') ? 'page' : undefined} class="hover:text-accent aria-[current=page]:text-accent aria-[current=page]:underline underline-offset-8">{label}</a>)}
+    </nav>
+  </Container>
+</header>
