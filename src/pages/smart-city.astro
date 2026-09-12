@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/smart-city.css';
+import Header from '../components/smart-city/Header.astro';
+import Hero from '../components/smart-city/Hero.astro';
+import CitySafe from '../components/smart-city/CitySafe.astro';
+import City247 from '../components/smart-city/City247.astro';
+import SmartCityMedia from '../components/smart-city/SmartCityMedia.astro';
+import CityPost from '../components/smart-city/CityPost.astro';
+import PoleVolt from '../components/smart-city/PoleVolt.astro';
+import Partnerships from '../components/smart-city/Partnerships.astro';
+import Recognition from '../components/smart-city/Recognition.astro';
+import Closing from '../components/smart-city/Closing.astro';
+import Footer from '../components/smart-city/Footer.astro';
+---
+<Layout title="Smart City | Karl Turkel">
+  <div class="smart-city-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <Hero />
+      <CitySafe />
+      <City247 />
+      <SmartCityMedia />
+      <CityPost />
+      <PoleVolt />
+      <Partnerships />
+      <Recognition />
+      <Closing />
+    </main>
+    <Footer />
+  </div>
+</Layout>

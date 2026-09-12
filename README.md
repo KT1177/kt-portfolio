@@ -45,3 +45,9 @@ Then import `media` and `Media` into a section and render `<Media asset={media.h
 Remote: https://github.com/KT1177/kt-portfolio.git
 
 Authenticate with GitHub CLI using `gh auth login --hostname github.com --git-protocol https --web`, then `gh auth setup-git`. Run `git fetch origin` before pushing to inspect existing remote history; do not force-push over existing work.
+
+## Smart City
+
+`/smart-city/` renders the supplied eight-chapter story plus its hero. Chapters and page navigation live in `src/components/smart-city/`; scoped styling lives in `src/styles/smart-city.css`. `Layout.astro` provides document metadata without adding duplicate navigation or main landmarks.
+
+Set `PUBLIC_R2_BASE_URL` and rebuild to resolve the exact object keys in `src/data/smart-city-media.ts`. Until then, images use a local placeholder and the patent link has no destination. Film buttons remain disabled until real film URLs are supplied. Recognition is an explicit placeholder. The four additional navigation destinations have placeholder routes.

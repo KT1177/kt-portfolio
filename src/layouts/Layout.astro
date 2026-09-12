@@ -1,0 +1,7 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description?: string; }
+const { title, description = 'Karl Turkel’s journey from emergency communications to connected cities, digital platforms and smart infrastructure.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="description" content={description} /><title>{title}</title><link rel="icon" href="/favicon.svg" /></head><body><slot /></body></html>

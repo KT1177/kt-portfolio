@@ -1,0 +1,98 @@
+.smart-city-page { --sc-paper:#f1f0e9; --sc-ink:#202826; background:var(--sc-paper);color:var(--sc-ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5; }
+.smart-city-page * { box-sizing:border-box; }
+.smart-city-page img { display:block;width:100%;height:100%;object-fit:cover; }
+.smart-city-page figure,.smart-city-page p { margin:0; }
+.smart-city-page a { text-underline-offset:.3em; }
+.smart-city-page a:hover { text-decoration:underline; }
+.smart-city-page .dark { background:#202826;color:#f1f0e9; }
+.smart-city-page .skip-link { position:absolute;left:1rem;top:-6rem;z-index:20;padding:1rem;background:white;color:#202826; }
+.smart-city-page .skip-link:focus { top:1rem; }
+.smart-city-page .site-header { display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.5rem 5vw; }
+.smart-city-page .monogram,.smart-city-page .signature { font-size:2rem;font-weight:700;letter-spacing:-.09em; }
+.smart-city-page .desktop-nav { display:flex;gap:clamp(1rem,2.3vw,2.5rem);font-size:.875rem; }
+.smart-city-page [aria-current=page] { text-decoration:underline; }
+.smart-city-page .mobile-menu { display:none; }
+.smart-city-page h1 { font-size:clamp(3rem,6.2vw,7rem);line-height:1.02;letter-spacing:-.055em;font-weight:500; }
+.smart-city-page h2 { font-size:clamp(2.5rem,4.5vw,5rem);line-height:1.07;letter-spacing:-.045em;font-weight:500; }
+.smart-city-page h3 { font-size:clamp(1.6rem,2.5vw,2.8rem);line-height:1.2;letter-spacing:-.03em;font-weight:500;margin:1.5rem 0; }
+.smart-city-page .eyebrow,.smart-city-page .chapter-meta { font-size:.875rem;line-height:1.5; }
+.smart-city-page .eyebrow { text-transform:uppercase;letter-spacing:.08em; }
+.smart-city-page .chapter-meta { display:flex;gap:2rem;align-items:start;margin-bottom:2.5rem; }
+.smart-city-page .chapter-meta strong { font-weight:500;display:grid; }
+.smart-city-page small { display:block;font-size:.875rem; }
+.smart-city-page .chapter { scroll-margin-top:1rem; }
+.smart-city-page .hero,.smart-city-page .citysafe-hero,.smart-city-page .scm-photographic-hero,.smart-city-page .citypost-photographic-area,.smart-city-page .closing { position:relative;isolation:isolate;overflow:hidden; }
+.smart-city-page .hero-backdrop,.smart-city-page .citysafe-backdrop,.smart-city-page .citypost-scene,.smart-city-page .closing-background { position:absolute;inset:0;z-index:-2; }
+.smart-city-page .hero-backdrop figure { height:100%; }
+.smart-city-page .hero::after,.smart-city-page .citysafe-hero::after,.smart-city-page .scm-photographic-hero::after,.smart-city-page .citypost-photographic-area::after,.smart-city-page .closing::after { content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,22,20,.92),rgba(12,22,20,.35));z-index:-1; }
+.smart-city-page .hero-content { padding:5rem 7vw 4rem; }
+.smart-city-page .hero h1 { margin:2rem 0; }
+.smart-city-page .hero-intro { max-width:34rem;font-size:1.125rem; }
+.smart-city-page .film-pending { margin:2rem 0; }
+.smart-city-page .video-inline-trigger { border:1px solid currentColor;padding:.8rem 1.1rem;border-radius:2rem;font-size:.875rem; }
+.smart-city-page .video-inline-trigger:disabled { opacity:.7;cursor:not-allowed; }
+.smart-city-page .journey-link { display:inline-block;margin-top:2rem;font-size:.9rem; }
+.smart-city-page .journey-link span { margin-left:1rem; }
+.smart-city-page .citysafe-content { padding:7rem 7vw; }
+.smart-city-page .citysafe-editorial { max-width:48rem; }
+.smart-city-page .citysafe-support,.smart-city-page .closing-support { max-width:34rem;margin-top:2rem;display:grid;gap:1.25rem;font-size:1.125rem; }
+.smart-city-page .citysafe-panels { display:grid;grid-template-columns:1fr 1fr; }
+.smart-city-page .citysafe-story-panel { display:flex;align-items:center;justify-content:center;padding:5rem 2rem;background:#d9ddd5; }
+.smart-city-page .citysafe-patent-panel { padding:3rem;display:grid;gap:1.5rem;text-align:center;font-size:.875rem; }
+.smart-city-page .citysafe-patent-panel img { height:20rem;object-fit:contain; }
+.smart-city-page .citysafe-patent-panel[aria-disabled=true] { cursor:default; }
+.smart-city-page .city247-editorial { padding:7rem 7vw;display:grid;grid-template-columns:1fr 1fr;gap:6vw; }
+.smart-city-page .chapter-copy>p:not(.chapter-meta) { max-width:34rem;font-size:1.125rem; }
+.smart-city-page .city247-pullquote { margin-top:4rem; }
+.smart-city-page blockquote { font-size:clamp(1.75rem,2.8vw,3rem);line-height:1.2;letter-spacing:-.03em;margin:0 0 1.5rem; }
+.smart-city-page figcaption span { display:block; }
+.smart-city-page .city247-pullquote figcaption { font-size:.875rem; }
+.smart-city-page .city247-photo-frame { position:relative; }
+.smart-city-page .city247-photo-frame>img { aspect-ratio:4/5; }
+.smart-city-page .city247-photo-proof { padding:1.5rem;background:#e7e9df;color:#202826; }
+.smart-city-page .stat { display:flex;align-items:center;gap:1.5rem; }
+.smart-city-page .stat>strong { font-size:clamp(3rem,6vw,6rem);font-weight:500;line-height:1;letter-spacing:-.05em; }
+.smart-city-page .city247-photo-caption { margin-top:1rem;font-size:.875rem; }
+.smart-city-page .scm-photographic-hero { padding:7rem 7vw; }
+.smart-city-page .scm-photographic-hero>img { position:absolute;inset:0;z-index:-2; }
+.smart-city-page .scm-introduction { max-width:39rem; }
+.smart-city-page .scm-proof { padding:3rem 7vw;display:flex;justify-content:space-between;gap:3rem;flex-wrap:wrap; }
+.smart-city-page .scm-edison { display:flex;gap:1.5rem;align-items:center;font-size:.875rem; }
+.smart-city-page .scm-edison img { width:6rem;height:7rem;object-fit:contain; }
+.smart-city-page .citypost-grid { padding:8rem 7vw; }
+.smart-city-page .citypost-grid .chapter-copy { max-width:37rem; }
+.smart-city-page .polevolt-editorial { padding:7rem 7vw; }
+.smart-city-page .polevolt-introduction { display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:end;margin-bottom:3rem; }
+.smart-city-page .polevolt-summary { max-width:34rem;font-size:1.125rem;padding-bottom:1.5rem; }
+.smart-city-page .polevolt-feature-photo { aspect-ratio:16/9; }
+.smart-city-page .partnerships,.smart-city-page .recognition { padding:7rem 7vw; }
+.smart-city-page .section-heading>p:not(.chapter-meta) { margin-top:1.5rem;font-size:1.125rem; }
+.smart-city-page .partnership-grid { display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem; }
+.smart-city-page .partner-photo img { aspect-ratio:4/3;height:auto; }
+.smart-city-page .partner-photo figcaption { padding-top:1rem;font-size:.875rem; }
+.smart-city-page .partner-photo strong { font-size:1.25rem;font-weight:500; }
+.smart-city-page .recognition-pending { color:#59625d; }
+.smart-city-page .closing-content { padding:7rem 7vw; }
+.smart-city-page .closing-headline-line { display:block; }
+.smart-city-page .site-footer { padding:3rem 5vw;display:grid;grid-template-columns:1fr 2fr 1fr;gap:2rem;align-items:center;font-size:.875rem; }
+.smart-city-page .site-footer>div { text-align:center; }
+.smart-city-page .site-footer>a:last-child { text-align:right; }
+.smart-city-page .footer-line { margin-top:.75rem; }
+@media(max-width:900px) {
+ .smart-city-page .desktop-nav { display:none; }
+ .smart-city-page .mobile-menu { display:block;position:relative; }
+ .smart-city-page summary { cursor:pointer;list-style:none;padding:.5rem; }
+ .smart-city-page .mobile-menu nav { position:absolute;right:0;top:3rem;z-index:10;min-width:15rem;background:var(--sc-paper);border:1px solid #c0c8c1;padding:1rem;box-shadow:0 1rem 2rem #0002; }
+ .smart-city-page .mobile-menu nav a { display:block;padding:.7rem; }
+ .smart-city-page .city247-editorial,.smart-city-page .polevolt-introduction { grid-template-columns:1fr;gap:3rem; }
+ .smart-city-page .city247-photograph { max-width:38rem; }
+}
+@media(max-width:600px) {
+ .smart-city-page .hero-content,.smart-city-page .citysafe-content,.smart-city-page .city247-editorial,.smart-city-page .scm-photographic-hero,.smart-city-page .citypost-grid,.smart-city-page .polevolt-editorial,.smart-city-page .partnerships,.smart-city-page .recognition,.smart-city-page .closing-content { padding:4rem 6vw; }
+ .smart-city-page .citysafe-panels,.smart-city-page .partnership-grid { grid-template-columns:1fr; }
+ .smart-city-page .citysafe-patent-panel { padding:2rem; }
+ .smart-city-page .site-footer { grid-template-columns:1fr 1fr; }
+ .smart-city-page .site-footer>div { grid-column:1/-1;grid-row:1; }
+ .smart-city-page .closing-headline-line { display:inline; }
+ .smart-city-page .chapter-meta { margin-bottom:2rem; }
+}

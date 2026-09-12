@@ -1,0 +1,31 @@
+---
+import { smartCityUrl } from '../../data/smart-city-media';
+---
+<section id="citysafe" class="chapter" aria-labelledby="citysafe-heading">
+      <div class="citysafe-hero dark">
+        <div class="citysafe-backdrop">
+          <img src={smartCityUrl("call-box-city.webp") ?? "/images/media-placeholder.svg"} alt="A red New York City emergency call box with fire and police buttons on a street at dusk" loading="lazy" decoding="async"/>
+        </div>
+        <div class="citysafe-content">
+          <div class="citysafe-editorial">
+            <p class="chapter-meta"><span>01</span><strong><small>2005 – PRESENT</small></strong></p>
+            <h2 id="citysafe-heading">I started by asking how a city could communicate better.</h2>
+            <div class="citysafe-support">
+              <p>My interest in outdoor advertising led me to think differently about how we connect the streets in times of emergencies.</p>
+              <p>After 9/11 I began exploring real-time, interactive, street-level emergency messaging with direct access to a live emergency operator.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="citysafe-panels">
+        <div class="citysafe-story-panel">
+          <button type="button" disabled class="video-inline-trigger">
+            <span aria-hidden="true">▷</span> CITYSAFE FILM — COMING SOON
+          </button>
+        </div>
+        <a class="citysafe-patent-panel" href={smartCityUrl("US20080304628.pdf")} aria-disabled={!smartCityUrl("US20080304628.pdf") ? "true" : undefined} target="_blank" rel="noopener noreferrer" aria-label="View CitySafe patent US20080304628 (PDF)">
+          <img src={smartCityUrl("patent_payphone_image.webp") ?? "/images/media-placeholder.svg"} alt="Original patent drawing, Figure 5, showing a payphone with an emergency assistance screen" loading="lazy" decoding="async"/>
+          <span>{smartCityUrl("US20080304628.pdf") ? "VIEW PATENT" : "PATENT PDF COMING SOON"} <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
