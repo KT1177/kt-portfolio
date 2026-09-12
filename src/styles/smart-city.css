@@ -248,3 +248,34 @@
   }
   .smart-city-page #citysafe .citysafe-patent-panel img { padding:1rem; }
 }
+
+/* CitySafe continuation: story, physical concept, and patent evidence. */
+.smart-city-page #citysafe .citysafe-meta { display:grid;grid-template-columns:1fr;gap:.4rem;font-size:.875rem;letter-spacing:.1em; }
+.smart-city-page #citysafe .citysafe-meta>span { opacity:1;font-weight:500; }
+.smart-city-page #citysafe .citysafe-meta>span+span { opacity:.7;letter-spacing:.04em; }
+.smart-city-page #citysafe-heading>span { display:block; }
+.smart-city-page #citysafe-heading { font-size:clamp(2.65rem,4.5vw,5rem); }
+.smart-city-page #citysafe .citysafe-panels {
+  grid-template-columns:minmax(0,44fr) minmax(0,28fr) minmax(0,28fr);
+  gap:clamp(1.5rem,2.8vw,3rem);padding-block:clamp(3.5rem,5vw,5.5rem);align-items:start;
+  --citysafe-evidence-height:clamp(21rem,29vw,27rem);
+}
+.smart-city-page #citysafe .citysafe-invention-copy { padding-right:clamp(.5rem,2vw,2rem); }
+.smart-city-page #citysafe .citysafe-invention-copy h3 { font-size:clamp(1.8rem,2.65vw,2.8rem);margin-block:1.25rem 1.5rem;line-height:1.15; }
+.smart-city-page #citysafe .citysafe-invention-copy>p:not(.eyebrow) { max-width:30rem;font-size:1.0625rem;line-height:1.75; }
+.smart-city-page #citysafe .citysafe-capabilities { list-style:none;padding:0;margin:2rem 0 0;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;max-width:30rem;font-size:.75rem;letter-spacing:.075em;line-height:1.6;color:#59625d; }
+.smart-city-page #citysafe :is(.citysafe-story-panel,.citysafe-patent-panel) { gap:.8rem;justify-content:flex-start;min-width:0; }
+.smart-city-page #citysafe :is(.citysafe-concept-photo,.citysafe-patent-panel img) {
+  width:100%;height:var(--citysafe-evidence-height);max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;padding:0;
+}
+.smart-city-page #citysafe .citysafe-patent-panel img { padding:.75rem; }
+.smart-city-page #citysafe :is(.citysafe-story-panel .video-inline-trigger,.citysafe-patent-panel>span) { font-size:.75rem;letter-spacing:.06em;padding:.25rem 0; }
+@media(max-width:1000px) {
+ .smart-city-page #citysafe .citysafe-panels { grid-template-columns:minmax(0,1fr) minmax(0,1fr);--citysafe-evidence-height:clamp(23rem,50vw,30rem);gap:2rem; }
+ .smart-city-page #citysafe .citysafe-invention-copy { grid-column:1/-1;max-width:40rem;padding:0;margin-bottom:1rem; }
+}
+@media(max-width:600px) {
+ .smart-city-page #citysafe .citysafe-panels { grid-template-columns:minmax(0,1fr);--citysafe-evidence-height:clamp(24rem,130vw,32rem);gap:2.5rem; }
+ .smart-city-page #citysafe .citysafe-invention-copy { margin-bottom:0; }
+ .smart-city-page #citysafe .citysafe-invention-copy h3 { max-width:20ch; }
+}
