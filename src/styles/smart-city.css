@@ -324,3 +324,20 @@
  .smart-city-page #citysafe :is(.citysafe-story-panel,.citysafe-patent-panel) { width:100%;max-width:30rem; }
  .smart-city-page #citysafe .citysafe-concept-photo { object-fit:contain; }
 }
+
+/* Matched crop windows; the two heroes meet without a spacer. */
+.smart-city-page .hero::before { background:linear-gradient(to bottom,transparent 96%,rgba(23,33,38,.45) 100%); }
+.smart-city-page #citysafe { border-top:0; }
+.smart-city-page #citysafe .citysafe-image-frame {
+  width:100%;height:var(--citysafe-evidence-height);overflow:hidden;
+  border:1px solid var(--citysafe-outline);border-bottom:0;
+}
+.smart-city-page #citysafe .citysafe-image-frame img {
+  width:100%;height:100%;max-height:none;aspect-ratio:auto;border:0;
+}
+.smart-city-page #citysafe .citysafe-image-frame .citysafe-concept-photo {
+  object-fit:cover;object-position:60% 18%;padding:0;
+}
+.smart-city-page #citysafe .citysafe-patent-panel .citysafe-image-frame img {
+  object-fit:contain;object-position:center;padding:1rem;
+}
