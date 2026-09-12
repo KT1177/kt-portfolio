@@ -195,3 +195,56 @@
  .smart-city-page .mobile-menu nav { position:absolute;right:0;top:3rem;z-index:10;min-width:17rem;background:var(--sc-paper);border:1px solid #c0c8c1;padding:1rem;box-shadow:0 1rem 2rem #0002; }
  .smart-city-page .mobile-menu nav a { display:block;padding:.7rem; }
 }
+
+/* Pass 2A: CitySafe only, plus the final edge of the opening hero. */
+.smart-city-page .hero::before {
+  background:linear-gradient(to bottom,transparent 94%,#000 100%);
+}
+.smart-city-page #citysafe { border-top:clamp(1.5rem,3vw,3rem) solid #000; }
+.smart-city-page #citysafe .citysafe-hero::before { content:none; }
+.smart-city-page #citysafe .citysafe-hero {
+  --sc-image-position:center;
+}
+.smart-city-page #citysafe .citysafe-content {
+  min-height:clamp(36rem,56vw,52rem);
+  padding-block:clamp(5rem,9vw,9rem);
+}
+.smart-city-page #citysafe .citysafe-editorial { max-width:44rem; }
+.smart-city-page #citysafe .citysafe-hero::after {
+  background:linear-gradient(90deg,rgba(16,22,21,.88),rgba(16,22,21,.7) 36%,rgba(16,22,21,.12) 70%,transparent);
+}
+.smart-city-page #citysafe .citysafe-panels {
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(2rem,5vw,5rem);
+  padding-block:clamp(4rem,7vw,8rem);
+  align-items:stretch;background:var(--sc-paper);
+}
+.smart-city-page #citysafe :is(.citysafe-story-panel,.citysafe-patent-panel) {
+  display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;
+  gap:clamp(1.5rem,3vw,3rem);padding:0;background:transparent;
+  border:0;border-radius:0;box-shadow:none;
+}
+.smart-city-page #citysafe .citysafe-concept-photo {
+  width:100%;height:auto;aspect-ratio:1067/1600;object-fit:contain;
+}
+.smart-city-page #citysafe .citysafe-story-panel .video-inline-trigger {
+  align-self:flex-start;padding:.5rem 0;border:0;border-radius:0;
+  font-size:.875rem;letter-spacing:.08em;text-align:left;
+}
+.smart-city-page #citysafe .citysafe-patent-panel img {
+  width:100%;height:auto;max-height:none;aspect-ratio:1067/1600;
+  object-fit:contain;padding:clamp(1rem,2.5vw,3rem);
+}
+.smart-city-page #citysafe .citysafe-patent-panel>span {
+  display:block;align-self:flex-start;padding:.5rem 0;
+  font-size:.875rem;letter-spacing:.08em;text-align:left;
+}
+@media(max-width:700px) {
+  .smart-city-page #citysafe .citysafe-panels { grid-template-columns:minmax(0,1fr);gap:3.5rem; }
+  .smart-city-page #citysafe .citysafe-content { min-height:0;padding-block:5rem; }
+  .smart-city-page #citysafe .citysafe-hero { --sc-image-position:62% center; }
+  .smart-city-page #citysafe .citysafe-hero::after {
+    background:linear-gradient(90deg,rgba(16,22,21,.86),rgba(16,22,21,.62) 65%,rgba(16,22,21,.3));
+  }
+  .smart-city-page #citysafe .citysafe-patent-panel img { padding:1rem; }
+}

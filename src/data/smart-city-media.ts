@@ -2,6 +2,7 @@ import { mediaUrl } from '../lib/media';
 
 export const smartCityMedia = {
   'smart-city-hero-nyc.webp': 'smart-city/smart-city-hero-nyc.webp',
+  'citysafe-nyc-hero.webp': 'smart-city/citysafe-nyc-hero.webp',
   'call-box-city.webp': 'smart-city/call-box-city.webp',
   'US20080304628.pdf': 'smart-city/smart-city-pdfs/US20080304628.pdf',
   'patent_payphone_image.webp': 'smart-city/patent_payphone_image.webp',
