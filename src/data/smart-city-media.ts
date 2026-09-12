@@ -15,5 +15,5 @@ export const smartCityMedia = {
 } as const;
 
 export function smartCityUrl(name: keyof typeof smartCityMedia) {
-  return mediaUrl(smartCityMedia[name]);
+  return mediaUrl(smartCityMedia[name], import.meta.env.PUBLIC_R2_BASE_URL ?? 'https://pub-e185fd1db9bf4dd59d2b99be455217bd.r2.dev');
 }
