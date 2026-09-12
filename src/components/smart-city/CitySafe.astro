@@ -28,13 +28,16 @@ import { smartCityUrl } from '../../data/smart-city-media';
         </div>
         <div class="citysafe-story-panel">
           <img class="citysafe-concept-photo" src={smartCityUrl("citysafe-nyc-hero.webp") ?? "/images/media-placeholder.svg"} alt="CitySafe emergency touchscreen integrated into a New York City phone booth near Penn Station" width="1067" height="1600" loading="lazy" decoding="async"/>
-          <button type="button" disabled class="video-inline-trigger" title="CitySafe film coming soon">
+          <button type="button" disabled class="video-inline-trigger citysafe-action" title="CitySafe film coming soon">
             <span aria-hidden="true">▷</span> WATCH CITYSAFE STORY
           </button>
         </div>
-        <a class="citysafe-patent-panel" href={smartCityUrl("US20080304628.pdf")} aria-disabled={!smartCityUrl("US20080304628.pdf") ? "true" : undefined} target="_blank" rel="noopener noreferrer" aria-label="View CitySafe patent US20080304628 (PDF)">
+        <div class="citysafe-patent-panel">
+          <a class="citysafe-patent-link" href={smartCityUrl("US20080304628.pdf")} aria-disabled={!smartCityUrl("US20080304628.pdf") ? "true" : undefined} target="_blank" rel="noopener noreferrer" aria-label="View CitySafe patent US20080304628 (PDF)">
           <img src={smartCityUrl("patent_payphone_image.webp") ?? "/images/media-placeholder.svg"} alt="Original patent drawing, Figure 5, showing a payphone with an emergency assistance screen" loading="lazy" decoding="async"/>
-          <span>{smartCityUrl("US20080304628.pdf") ? "VIEW PATENT" : "PATENT PDF COMING SOON"} <span aria-hidden="true">→</span></span>
+          <span class="citysafe-action">{smartCityUrl("US20080304628.pdf") ? "VIEW PATENT" : "PATENT PDF COMING SOON"} <span aria-hidden="true">→</span></span>
         </a>
+          <p class="citysafe-patent-caption">EARLY CONCEPT AND PATENT DRAWING</p>
+        </div>
       </div>
     </section>
