@@ -339,5 +339,5 @@
   object-fit:cover;object-position:60% 18%;padding:0;
 }
 .smart-city-page #citysafe .citysafe-patent-panel .citysafe-image-frame img {
-  object-fit:contain;object-position:center;padding:1rem;
+  object-fit:contain;object-position:center;padding:12px;
 }
