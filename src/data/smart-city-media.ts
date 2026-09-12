@@ -5,13 +5,13 @@ export const smartCityMedia = {
   'call-box-city.webp': 'smart-city/call-box-city.webp',
   'US20080304628.pdf': 'smart-city/US20080304628.pdf',
   'patent_payphone_image.webp': 'smart-city/patent_payphone_image.webp',
-  '247-jennifer-faulk.webp': 'smart-city/247-jennifer-faulk.webp',
+  '247-interface.webp': 'smart-city/247-interface.webp',
   'JC-kiosk-city.webp': 'smart-city/JC-kiosk-city.webp',
   'edison-gold-award.webp': 'smart-city/edison-gold-award.webp',
-  'citypost-screens-final.webp': 'smart-city/citypost-screens-final.webp',
-  'polevolt-kt-port.webp': 'smart-city/polevolt-kt-port.webp',
-  'chicago-jcd-citypost-1.webp': 'smart-city/chicago-jcd-citypost-1.webp',
-  'reno-screen-kt-port.webp': 'smart-city/reno-screen-kt-port.webp',
+  'citypost-screens.webp': 'smart-city/citypost-screens.webp',
+  'polevolt-web.webp': 'smart-city/polevolt-web.webp',
+  'chicago-jcd-citypost.webp': 'smart-city/chicago-jcd-citypost.webp',
+  'reno-screen.webp': 'smart-city/reno-screen.webp',
 } as const;
 
 export function smartCityUrl(name: keyof typeof smartCityMedia) {
