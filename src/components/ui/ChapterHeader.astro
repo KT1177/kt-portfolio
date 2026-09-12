@@ -1,0 +1,82 @@
+---
+interface Props {
+  number: string;
+  date?: string;
+  descriptor?: string;
+  layout?: 'stacked' | 'editorial' | 'hanging';
+}
+const { number, date, descriptor, layout = 'stacked' } = Astro.props;
+---
+
+<p class:list={["chapter-meta", "chapter-header", { "chapter-header--editorial": layout === "editorial", "chapter-header--hanging": layout === "hanging" }]}>
+  <span class="chapter-header__number">{number}</span>
+  {date && <span class="chapter-header__date">{date}</span>}
+  {descriptor && <span class="chapter-header__descriptor">{descriptor}</span>}
+</p>
+
+<style>
+  :where(.chapter-header) { margin: 0 0 var(--sc-space, 2.5rem); }
+  .chapter-header.chapter-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    align-items: start;
+    gap: .5rem;
+    color: inherit;
+    font-variant-numeric: tabular-nums;
+  }
+  .chapter-header.chapter-meta > .chapter-header__number {
+    font-size: clamp(3.5rem, 5.5vw, 6rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.045em;
+    opacity: var(--chapter-number-opacity, .3);
+  }
+  .chapter-header.chapter-meta > .chapter-header__date {
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -.025em;
+    opacity: 1;
+  }
+  .chapter-header.chapter-meta > .chapter-header__descriptor {
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    opacity: 1;
+  }
+  .chapter-header.chapter-meta.chapter-header--editorial {
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: baseline;
+    column-gap: clamp(1.25rem, 2.5vw, 2rem);
+    row-gap: .4rem;
+    margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+  }
+  .chapter-header--editorial.chapter-meta > :is(.chapter-header__number, .chapter-header__date) {
+    font-size: clamp(3rem, 4.5vw, 4.5rem);
+    line-height: 1;
+  }
+  .chapter-header--editorial.chapter-meta > .chapter-header__descriptor {
+    grid-column: 2;
+  }
+  .chapter-header.chapter-meta.chapter-header--hanging {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: baseline;
+    gap: .4rem;
+    margin-bottom: 1.5rem;
+  }
+  .chapter-header--hanging.chapter-meta > :is(.chapter-header__number, .chapter-header__date) {
+    grid-area: 1 / 1;
+    font-family: inherit;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1;
+    align-self: baseline;
+  }
+  .chapter-header--hanging.chapter-meta > .chapter-header__number {
+    margin-left: calc(-1 * var(--chapter-gutter, clamp(3rem, 7vw, 6rem)));
+  }
+  .chapter-header--hanging.chapter-meta > .chapter-header__date { font-weight: 400; }
+  .chapter-header--hanging.chapter-meta > .chapter-header__descriptor { grid-column: 1; font-weight: 400; }
+</style>

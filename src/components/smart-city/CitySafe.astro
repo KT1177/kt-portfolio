@@ -1,4 +1,7 @@
 ---
+import CapabilityPills from '../ui/CapabilityPills.astro';
+import ChapterHeader from '../ui/ChapterHeader.astro';
+import VideoCTA from '../ui/VideoCTA.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section id="citysafe" class="chapter" aria-labelledby="citysafe-heading">
@@ -8,8 +11,8 @@ import { smartCityUrl } from '../../data/smart-city-media';
         </div>
         <div class="citysafe-content">
           <div class="citysafe-editorial">
-            <p class="chapter-meta citysafe-meta"><span>01 / CITYSAFE</span><span>2005–2012</span></p>
-            <h2 id="citysafe-heading"><span>I started with a simple question:</span> <span>How could a city communicate better?</span></h2>
+            <ChapterHeader number="01" date="2005" descriptor="THE BEGINNING: CITYSAFE" layout="editorial" />
+            <h2 id="citysafe-heading" class="citysafe-question"><span>I started with a</span> <span>simple question:</span> <span>How could a city</span> <span>communicate better?</span></h2>
             <div class="citysafe-support">
               <p>My interest in outdoor advertising led me to think differently about how we connect the streets in times of emergencies.</p>
               <p>After 9/11 I began exploring real-time, interactive, street-level emergency messaging with direct access to a live emergency operator.</p>
@@ -22,15 +25,13 @@ import { smartCityUrl } from '../../data/smart-city-media';
           <p class="eyebrow">FROM IDEA TO INVENTION</p>
           <h3>What if the call box could become something more?</h3>
           <p>CitySafe began as an idea to reinvent outdated public infrastructure, transforming the call box into a connected communication hub for safety, information and community.</p>
-          <ul class="citysafe-capabilities" aria-label="CitySafe capabilities">
-            <li>TWO-WAY COMMUNICATION</li><li>EMERGENCY SERVICES</li><li>CAMERAS</li><li>SENSORS</li><li>LOCAL INFORMATION</li><li>COMMUNITY</li>
-          </ul>
+          <CapabilityPills class="citysafe-capabilities" label="CitySafe capabilities" items={['TWO-WAY COMMUNICATION', 'EMERGENCY SERVICES', 'CAMERAS', 'SENSORS', 'LOCAL INFORMATION', 'COMMUNITY']} />
         </div>
         <div class="citysafe-story-panel">
           <div class="citysafe-image-frame"><img class="citysafe-concept-photo" src={smartCityUrl("citysafe-nyc-hero.webp") ?? "/images/media-placeholder.svg"} alt="CitySafe emergency touchscreen integrated into a New York City phone booth near Penn Station" width="1067" height="1600" loading="lazy" decoding="async"/></div>
-          <button type="button" disabled class="video-inline-trigger citysafe-action" title="CitySafe film coming soon">
-            <span aria-hidden="true">▷</span> WATCH CITYSAFE STORY
-          </button>
+          <div class="citysafe-action citysafe-video-action">
+            <VideoCTA label="WATCH CITYSAFE STORY" title="CitySafe film coming soon" fullWidth />
+          </div>
         </div>
         <div class="citysafe-patent-panel">
           <a class="citysafe-patent-link" href={smartCityUrl("US20080304628.pdf")} aria-disabled={!smartCityUrl("US20080304628.pdf") ? "true" : undefined} target="_blank" rel="noopener noreferrer" aria-label="View CitySafe patent US20080304628 (PDF)">

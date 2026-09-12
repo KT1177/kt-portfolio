@@ -1,0 +1,22 @@
+---
+interface Props {
+  items: string[];
+  label: string;
+  class?: string;
+}
+const { items, label, class: className } = Astro.props;
+---
+<ul class:list={['capability-pills', className]} aria-label={label}>
+  {items.map(item => <li>{item}</li>)}
+</ul>
+<style>
+  .capability-pills {
+    list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.6rem;
+    font-size:.75rem;letter-spacing:.075em;line-height:1.6;
+    color:var(--capability-color, inherit);
+  }
+  .capability-pills li {
+    display:flex;align-items:center;min-height:2rem;padding:.3rem .65rem;
+    border:1px solid var(--capability-border, #cccac1);border-radius:3px;background:transparent;
+  }
+</style>

@@ -1,20 +1,21 @@
 ---
+import ChapterHeader from '../ui/ChapterHeader.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section id="partnerships" class="partnerships dark">
       <div class="section-heading">
-        <p class="chapter-meta"><span>06</span><strong><small>Partnerships + client work</small></strong></p>
+        <ChapterHeader number="06" date="2023+" descriptor="PARTNERSHIPS + CLIENT WORK" layout="hanging" />
         <h2>Beyond our own platforms.</h2>
         <p>The same thinking. New places and partners.</p>
       </div>
       <div class="partnership-grid">
         <figure class="partner-photo">
-          <img src={smartCityUrl("chicago-jcd-citypost.webp") ?? "/images/media-placeholder.svg"} alt="JCDecaux CityPost information kiosk on a Chicago street" loading="lazy" decoding="async"/>
-          <figcaption><strong>JCDecaux</strong><span>CHICAGO PILOT</span></figcaption>
-        </figure>
-        <figure class="partner-photo">
           <img src={smartCityUrl("reno-screen.webp") ?? "/images/media-placeholder.svg"} alt="Lamar interactive airport screen in Reno installation" loading="lazy" decoding="async"/>
           <figcaption><strong>Lamar</strong><span>AIRPORT EXPERIENCE</span></figcaption>
+        </figure>
+        <figure class="partner-photo">
+          <img src={smartCityUrl("chicago-jcd-citypost.webp") ?? "/images/media-placeholder.svg"} alt="JCDecaux CityPost information kiosk on a Chicago street" loading="lazy" decoding="async"/>
+          <figcaption><strong>JCDecaux</strong><span>CHICAGO INTERACTIVE BUS SHELTERS</span></figcaption>
         </figure>
       </div>
     </section>

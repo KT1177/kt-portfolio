@@ -1,5 +1,17 @@
 ---
+import VideoCTA from '../ui/VideoCTA.astro';
+import ChapterHeader from '../ui/ChapterHeader.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
+const capabilities = [
+  { label: 'CONTENT', path: 'M5 3h14v18H5z M8 7h8 M8 11h8 M8 15h5' },
+  { label: 'DEVICES', path: 'M3 4h18v13H3z M8 21h8 M12 17v4' },
+  { label: 'ADVERTISING', path: 'M3 9v6h5l12 5V4L8 9H3 M8 15l2 6h4l-2-4 M8 9v6' },
+  { label: 'TRANSIT', path: 'M5 17V5q0-2 2-2h10q2 0 2 2v12H5z M5 10h14 M8 14h1 M15 14h1 M7 17l-2 4 M17 17l2 4 M8 20h8' },
+  { label: 'ANALYTICS', path: 'M4 3v18h17 M8 17v-5 M13 17V8 M18 17V4' },
+  { label: 'USERS', path: 'M15 7a3 3 0 1 1-6 0a3 3 0 1 1 6 0 M5 21v-3a7 7 0 0 1 14 0v3 M19 4a3 3 0 0 1 0 6 M21 13q2 2 2 5' },
+  { label: 'VIDEO', path: 'M3 5h18v14H3z M10 9l6 3-6 3z' },
+  { label: 'MOBILE', path: 'M7 2h10v20H7z M10 5h4 M11 19h2' },
+];
 ---
 <section id="citypost" class="chapter dark">
       <div class="citypost-photographic-area">
@@ -8,11 +20,18 @@ import { smartCityUrl } from '../../data/smart-city-media';
         </div>
         <div class="citypost-grid">
           <div class="chapter-copy">
-            <p class="chapter-meta"><span>04</span><strong><small>The platform behind the screens</small></strong></p>
+            <ChapterHeader number="04" date="2015+" descriptor="THE PLATFORM BEHIND THE SCREENS" layout="editorial" />
             <h2>CityPost</h2>
             <h3>The screens were only the beginning.</h3>
             <p>I designed CityPost from the ground up as a visual-first platform for managing screens, devices, content, advertising, data and users across an entire digital network.</p>
+            <div class="citypost-story-cta"><VideoCTA label="WATCH CITYPOST OVERVIEW" /></div>
           </div>
         </div>
       </div>
+      <ul class="citypost-capability-strip" aria-label="CityPost platform capabilities">
+        {capabilities.map(({ label, path }) => <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={path} /></svg>
+          <span>{label}</span>
+        </li>)}
+      </ul>
     </section>

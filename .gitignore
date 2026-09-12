@@ -6,3 +6,14 @@ dist/
 !.env.example
 .DS_Store
 .sites-runtime/
+
+# Local tooling, logs, and editor files
+.wrangler/
+.dev.vars
+.dev.vars.*
+*.log
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp

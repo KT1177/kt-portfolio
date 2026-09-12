@@ -1,4 +1,5 @@
 ---
+import VideoCTA from '../ui/VideoCTA.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section class="hero dark">
@@ -12,9 +13,7 @@ import { smartCityUrl } from '../../data/smart-city-media';
         <h1><span class="hero-headline-line">From</span> <span class="hero-headline-line">Madison Avenue</span> <span class="hero-headline-line">to the streets of</span> <span class="hero-headline-line">the connected city.</span></h1>
         <p class="hero-intro">A 20 year journey building products, platforms and technologies that changed how people connect with the places around them.</p>
         <div class="film-pending">
-          <button type="button" disabled class="video-inline-trigger">
-            <span aria-hidden="true">▷</span> Intro film — coming soon
-          </button>
+          <VideoCTA label="INTRO FILM — COMING SOON" />
         </div>
         <a class="journey-link" href="#citysafe">Explore the journey <span>↓</span></a>
       </div>

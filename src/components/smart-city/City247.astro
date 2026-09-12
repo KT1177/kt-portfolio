@@ -1,26 +1,41 @@
 ---
+import CapabilityPills from '../ui/CapabilityPills.astro';
+import ChapterHeader from '../ui/ChapterHeader.astro';
+import VideoCTA from '../ui/VideoCTA.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
 ---
-<section id="city247" class="chapter dark city247">
-      <div class="city247-editorial">
-        <div class="city247-introduction">
-          <div class="chapter-copy">
-            <p class="chapter-meta"><span>02</span><strong><span class="meta-year">2012</span><small>New York City</small></strong></p>
-            <h2>City24/7</h2>
-            <h3>From concept to the streets of Manhattan.</h3>
-            <p>CitySafe evolved into City24/7, bringing real time information, public services, local content and connectivity directly to city streets.</p>
-          </div>
-          <figure class="city247-pullquote">
-            <blockquote><span class="hanging-quote">“</span>The best product I’ve seen in years.”</blockquote>
-            <figcaption><span>Michael Bloomberg</span><span>Mayor of New York City</span></figcaption>
-          </figure>
+<section id="city247" class="chapter dark city247" aria-labelledby="city247-heading">
+  <div class="city247-case-study">
+    <header class="city247-intro">
+      <ChapterHeader number="02" date="2012" descriptor="NEW YORK CITY" layout="editorial" />
+      <h2 id="city247-heading">City24/7</h2>
+      <h3>From concept to the streets of Manhattan.</h3>
+      <p class="city247-summary">CitySafe evolved into City24/7, bringing real time information, public services, local content and connectivity directly to city streets.</p>
+    </header>
+    <figure class="city247-union-square">
+      <div class="city247-union-media">
+        <img src={smartCityUrl("247-interface.webp") ?? "/images/media-placeholder.svg"} alt="Jennifer Faulk interacting with the City24/7 touchscreen in Union Square" loading="lazy" decoding="async" />
+        <div class="city247-media-footer">
+          <VideoCTA label="WATCH UNION SQUARE STORY" />
+          <div class="city247-pilot"><strong>11</strong><span>INTERACTIVE KIOSKS<small>NEW YORK CITY PILOT</small></span></div>
         </div>
-        <figure class="city247-photograph">
-          <div class="city247-photo-frame">
-            <img src={smartCityUrl("247-interface.webp") ?? "/images/media-placeholder.svg"} alt="Jennifer Faulk interacting with the City24/7 touchscreen in Union Square" loading="lazy" decoding="async"/>
-            <div class="stat city247-photo-proof"><strong>11</strong><span>Interactive kiosks<small>New York City pilot</small></span></div>
-          </div>
-          <figcaption class="city247-photo-caption"><strong>Jennifer Faulk</strong><span>President, Union Square Partnership</span><span>Union Square, New York City</span></figcaption>
-        </figure>
       </div>
-    </section>
+      <figcaption class="city247-attribution"><strong>Jennifer Faulk</strong><span>President, Union Square Partnership</span><span>Union Square, New York City</span></figcaption>
+    </figure>
+    <div class="city247-proof-band">
+      <figure class="city247-bloomberg">
+        <blockquote><span class="city247-quote-line"><span class="city247-opening-quote">“</span>The best product</span><br /><span class="city247-quote-line">I’ve seen in years.”</span></blockquote>
+        <figcaption><strong>Michael Bloomberg</strong><span>Mayor of New York City</span></figcaption>
+      </figure>
+      <figure class="city247-cisco">
+        <div class="city247-cisco-media" aria-label="Cisco Live video poster coming soon">
+          <VideoCTA label="WATCH CISCO LIVE" />
+        </div>
+        <figcaption>IN PARTNERSHIP WITH CISCO</figcaption>
+      </figure>
+    </div>
+    <div class="city247-capabilities">
+      <CapabilityPills label="City24/7 capabilities" items={['INTERACTIVE TOUCHSCREENS', 'REAL-TIME CITY INFORMATION', 'EMERGENCY COMMUNICATIONS', 'PUBLIC SERVICES', 'TRANSIT + WAYFINDING', 'LOCAL CONTENT']} />
+    </div>
+  </div>
+</section>

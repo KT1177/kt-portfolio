@@ -1,13 +1,18 @@
 ---
+import VideoCTA from '../ui/VideoCTA.astro';
+import ChapterHeader from '../ui/ChapterHeader.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section id="polevolt" class="chapter">
       <div class="polevolt-editorial">
         <div class="polevolt-introduction">
           <div class="chapter-copy">
-            <p class="chapter-meta"><span>05</span><strong><small>Smart infrastructure</small></strong></p>
+            <ChapterHeader number="05" date="2022" descriptor="SMART INFRASTRUCTURE" layout="hanging" />
             <h2>PoleVolt</h2>
-            <h3>From smart screens to smart infrastructure.</h3>
+            <div class="polevolt-headline-group">
+              <h3>From smart kiosks to smart EV charging infrastructure.</h3>
+              <div class="polevolt-story-cta"><VideoCTA label="WATCH POLEVOLT STORY" /></div>
+            </div>
           </div>
           <div class="polevolt-summary">
             <p>Working with Duke Energy, UNC Charlotte, the City of Charlotte and the Centralina Regional Council, CityPost became part of a curbside experience integrating EV charging directly into light poles.</p>
