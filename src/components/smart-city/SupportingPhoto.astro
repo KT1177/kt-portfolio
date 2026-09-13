@@ -1,0 +1,41 @@
+---
+import { getImage } from 'astro:assets';
+import { smartCityUrl } from '../../data/smart-city-media';
+interface Props { file: 'citysafe-nyc-hero.webp' | '247-interface.webp' | 'polevolt-web.webp' | 'reno-screen.webp' | 'chicago-jcd-citypost.webp'; alt: string; class?: string; }
+const { file, alt, class: className } = Astro.props;
+const full = 'min(calc(100vw - 2 * clamp(1.5rem, 6vw, 7rem)), 82rem)';
+const settings = {
+  'citysafe-nyc-hero.webp': { width:1067,height:1600,widths:[640,800,1067],floor:800,sizes:`(max-width: 600px) calc(100vw - 3rem - 2px), (max-width: 1000px) calc(min(88vw, 30rem) - 2px), calc((${full} - 2 * clamp(1.25rem, 2.2vw, 2.25rem)) * .28 - 2px)` },
+  '247-interface.webp': { width:2560,height:1432,widths:[800,1200,1600,1920,2240,2560],floor:1920,sizes:`(max-width: 600px) calc(100vw - 3.75rem), (max-width: 700px) calc(88vw - .75rem), calc(${full} - clamp(3rem, 7vw, 6rem))` },
+  'polevolt-web.webp': { width:1600,height:963,widths:[640,960,1280,1600],floor:1280,sizes:`(max-width: 600px) calc(100vw - 3rem), ${full}` },
+  'reno-screen.webp': { width:1600,height:1090,widths:[960,1200,1600],floor:1200,sizes:`(max-width: 600px) calc(100vw - 3rem), (max-width: 700px) calc((${full} - 1.75rem) / 2), calc((${full} - 2rem) / 2)` },
+  'chicago-jcd-citypost.webp': { width:2349,height:1600,widths:[640,800,960,1200,1600,1920,2349],floor:1200,sizes:`(max-width: 600px) calc(100vw - 3rem), (max-width: 700px) calc((${full} - 1.75rem) / 2), calc((${full} - 2rem) / 2)` },
+};
+// Use the master in profiles where another encode costs more or loses fine detail.
+const masterMedia = {
+  'citysafe-nyc-hero.webp': '(min-resolution: 3dppx), (min-width: 701px) and (max-width: 1000px) and (min-resolution: 2dppx)',
+  '247-interface.webp': '(min-width: 1024px) and (min-resolution: 2dppx)',
+  'polevolt-web.webp': '(min-width: 701px)',
+  'reno-screen.webp': undefined,
+  'chicago-jcd-citypost.webp': undefined,
+};
+const config = settings[file], src = smartCityUrl(file);
+const naturalFrame = file === '247-interface.webp' || file === 'polevolt-web.webp';
+const variants = src ? await Promise.all(config.widths.filter(width=>width<=config.width).map(async width => {
+  const transform = { src, width, height:Math.ceil(width*config.height/config.width), fit:'inside' as const };
+  const [avif,webp] = await Promise.all([
+    getImage({...transform,format:'avif',quality:80}),
+    // Preserve the uploaded master at native width; avoid another lossy WebP pass.
+    width===config.width ? Promise.resolve({src}) : getImage({...transform,format:'webp',quality:90}),
+  ]);
+  return {width,avif:avif.src,webp:webp.src};
+})) : [];
+const srcset = (format:'avif'|'webp',floor=0)=>variants.filter(v=>v.width>=floor).map(v=>`${v[format]} ${v.width}w`).join(', ');
+---
+{src ? <picture style="display:contents">
+  {masterMedia[file] && <source media={masterMedia[file]} type="image/webp" srcset={`${src} ${config.width}w`} sizes={config.sizes} />}
+  <source media="(min-width: 1024px)" type="image/avif" srcset={srcset('avif',config.floor)} sizes={config.sizes} />
+  <source media="(min-width: 1024px)" type="image/webp" srcset={srcset('webp',config.floor)} sizes={config.sizes} />
+  <source type="image/avif" srcset={srcset('avif')} sizes={config.sizes} />
+  <img class={className} style={naturalFrame ? `aspect-ratio:${config.width}/${config.height}` : undefined} src={src} srcset={srcset('webp')} sizes={config.sizes} width={config.width} height={config.height} alt={alt} loading="lazy" decoding="async" />
+</picture> : <img class={className} src="/images/media-placeholder.svg" alt={alt} loading="lazy" decoding="async" />}

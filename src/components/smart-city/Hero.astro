@@ -1,11 +1,45 @@
 ---
 import VideoCTA from '../ui/VideoCTA.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
+import { Image, getImage } from 'astro:assets';
+
+const heroSrc = smartCityUrl('smart-city-hero-nyc.webp') ?? '/images/media-placeholder.svg';
+const heroWidths = [1920, 2240, 2560];
+const heroSizes = '(max-width: 900px) max(100vw, 1920px), max(100vw, 2560px)';
+// Separate transforms preserve the approved WebP quality while adding AVIF 70.
+const heroAvif = await Promise.all(heroWidths.map(width => getImage({
+  src: heroSrc,
+  width,
+  // Round the bounding height up so proportional resizing preserves each width.
+  height: Math.ceil(width * 1006 / 2560),
+  format: 'avif',
+  quality: 70,
+  // Preserve the proportional resize used in the approved AVIF comparison.
+  fit: 'inside',
+})));
+const heroAvifSrcset = heroAvif.map((image, index) => `${image.src} ${heroWidths[index]}w`).join(', ');
 ---
 <section class="hero dark">
       <div class="hero-backdrop">
         <figure class="media-slot" style="aspect-ratio:16/9">
-          <img src={smartCityUrl("smart-city-hero-nyc.webp") ?? "/images/media-placeholder.svg"} alt="New York City at sunset, with the Empire State Building rising above the skyline and golden light to the right" loading="eager" fetchpriority="high" decoding="async"/>
+          {/* Account for the wide source filling a tall cover frame, especially on mobile. */}
+          <picture style="display:contents">
+          <source type="image/avif" srcset={heroAvifSrcset} sizes={heroSizes} />
+          <Image
+            src={heroSrc}
+            alt="New York City at sunset, with the Empire State Building rising above the skyline and golden light to the right"
+            width={2560}
+            height={1006}
+            widths={heroWidths}
+            sizes={heroSizes}
+            format="webp"
+            quality={85}
+            layout="none"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+          </picture>
         </figure>
       </div>
       <div class="hero-content">

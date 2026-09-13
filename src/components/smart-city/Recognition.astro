@@ -1,4 +1,6 @@
 ---
+import CertificateImage from './CertificateImage.astro';
+import AwardImage from './AwardImage.astro';
 import DocumentViewer from '../ui/DocumentViewer.astro';
 import ChapterHeader from '../ui/ChapterHeader.astro';
 const recommendations = [
@@ -17,7 +19,7 @@ const awards = [
   {file:'idc-gold.webp', name:'IDC Gold Award — Community Engagement', lines:['IDC Gold Award','Community Engagement'], size:'small'},
   {file:'edison-gold.webp', name:'Edison Gold Innovation Award', lines:['Edison Gold','Innovation Award'], size:'tall'},
   {file:'cleantech.webp', name:'Diversity, Equity and Inclusion in Cleantech', lines:['Diversity, Equity and','Inclusion in Cleantech'], size:'cleantech'},
-];
+] as const;
 ---
 <section id="recognition" class="recognition" aria-labelledby="recognition-heading">
   <div class="recognition-recommendations">
@@ -45,7 +47,7 @@ const awards = [
     <h3>Smart City Awards</h3>
     <div class="recognition-award-grid">
       {awards.map(award => <figure class={`recognition-award recognition-award--${award.size}`}>
-        <div class="recognition-award-stage"><img src={base+award.file} alt={award.name} loading="lazy" decoding="async" /></div>
+        <div class="recognition-award-stage">{award.file === 'ada-sapolin.png' ? <CertificateImage alt={award.name} /> : <AwardImage file={award.file} alt={award.name} />}</div>
         <figcaption>{award.lines.map(line => <span>{line}</span>)}</figcaption>
       </figure>)}
     </div>

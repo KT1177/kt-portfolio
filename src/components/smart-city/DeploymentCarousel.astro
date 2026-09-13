@@ -1,25 +1,64 @@
 ---
+import { getImage } from 'astro:assets';
+import PortfolioGallery from '../gallery/PortfolioGallery.astro';
+import GalleryImage from '../gallery/GalleryImage.astro';
 import { smartCityUrl } from '../../data/smart-city-media';
 const deployments = [
-  { name: 'Dallas DART, Texas', image: smartCityUrl('Citypost-Hero-DART.webp') },
-  { name: 'Dallas DART, Texas', image: smartCityUrl('Citypost-Hero-DART-2.webp') },
-  { name: 'Greensboro, North Carolina', image: smartCityUrl('Citypost-Hero-GB.webp') },
-  { name: 'Greensboro, North Carolina', image: smartCityUrl('Citypost-Hero-GB-1.webp') },
-  { name: 'Kansas City Streetcar, Missouri', image: smartCityUrl('Citypost-Hero-KC-Streetcar.webp') },
-  { name: 'Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-KC-Bus-1.webp') },
-  { name: 'Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-KC-Bus.webp') },
-  { name: 'Aurora, Illinois', image: smartCityUrl('Citypost-Hero-Aurora.webp') },
-  { name: 'Louisville, Kentucky', image: smartCityUrl('Citypost-Hero-Louisville.webp') },
-  { name: 'Milwaukee, Wisconsin', image: smartCityUrl('Citypost-Hero-MKE.webp') },
-  { name: 'Montgomery County, Maryland', image: smartCityUrl('Citypost-Hero-Moco.webp') },
-  { name: 'Torrance, California', image: smartCityUrl('Citypost-Hero-Torrance-Station.webp') },
-  { name: 'UMKC / Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-UMKC.webp') },
+  { name: 'Dallas DART, Texas', image: smartCityUrl('Citypost-Hero-DART.webp'), width: 1419, height: 1109 },
+  { name: 'Dallas DART, Texas', image: smartCityUrl('Citypost-Hero-DART-2.webp'), width: 1448, height: 1086 },
+  { name: 'Greensboro, North Carolina', image: smartCityUrl('Citypost-Hero-GB.webp'), width: 1419, height: 1109 },
+  { name: 'Greensboro, North Carolina', image: smartCityUrl('Citypost-Hero-GB-1.webp'), width: 1419, height: 1109 },
+  { name: 'Kansas City Streetcar, Missouri', image: smartCityUrl('Citypost-Hero-KC-Streetcar.webp'), width: 1419, height: 1109 },
+  { name: 'Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-KC-Bus-1.webp'), width: 1419, height: 1109 },
+  { name: 'Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-KC-Bus.webp'), width: 1419, height: 1109 },
+  { name: 'Aurora, Illinois', image: smartCityUrl('Citypost-Hero-Aurora.webp'), width: 1419, height: 1109 },
+  { name: 'Louisville, Kentucky', image: smartCityUrl('Citypost-Hero-Louisville.webp'), width: 1419, height: 1109 },
+  { name: 'Milwaukee, Wisconsin', image: smartCityUrl('Citypost-Hero-MKE.webp'), width: 1419, height: 1109 },
+  { name: 'Montgomery County, Maryland', image: smartCityUrl('Citypost-Hero-Moco.webp'), width: 1419, height: 1109 },
+  { name: 'Torrance, California', image: smartCityUrl('Citypost-Hero-Torrance-Station.webp'), width: 1419, height: 1109 },
+  { name: 'UMKC / Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-UMKC.webp'), width: 1419, height: 1108 },
 ];
+// Match the existing card width, including page gutters, track gaps and borders.
+const carouselSizes = '(max-width: 600px) calc((100vw - 3rem) * .85 - 2px), (max-width: 700px) calc(74.8vw - 2px), calc((min(calc(100vw - 2 * clamp(1.5rem, 6vw, 7rem)), 82rem) - 3.25rem) / 3.3 - 2px)';
+const responsiveDeployments = await Promise.all(deployments.map(async item => {
+  if (!item.image) return { ...item, optimized: undefined };
+  // Native width remains useful for the largest mobile cards at high DPR.
+  const widths = [...new Set([320, 400, 480, 640, 800, 960, 1200, item.width])]
+    .filter(width => width <= item.width);
+  const variants = await Promise.all(widths.map(async width => {
+    const transform = {
+      src: item.image!,
+      width,
+      height: Math.ceil(width * item.height / item.width),
+      fit: 'inside' as const,
+    };
+    const [avif, webp] = await Promise.all([
+      getImage({ ...transform, format: 'avif', quality: 70 }),
+      getImage({ ...transform, format: 'webp', quality: 85 }),
+    ]);
+    return { width, avif, webp };
+  }));
+  return { ...item, optimized: {
+    // Desktop-only quality floor; retain the full ladder below 1024px.
+    desktopAvifSrcset: variants.filter(v => v.width >= 800).map(v => `${v.avif.src} ${v.width}w`).join(', '),
+    desktopWebpSrcset: variants.filter(v => v.width >= 800).map(v => `${v.webp.src} ${v.width}w`).join(', '),
+    avifSrcset: variants.map(v => `${v.avif.src} ${v.width}w`).join(', '),
+    webpSrcset: variants.map(v => `${v.webp.src} ${v.width}w`).join(', '),
+    fallback: variants[variants.length - 1].webp.src,
+  } };
+}));
 ---
+<PortfolioGallery lightbox={true} label="Smart City Media deployments">
 <deployment-carousel class="scm-deployments">
   <div class="scm-deployment-track" tabindex="0" aria-label="City deployments, horizontally scrollable">
-    {deployments.map(item => <figure class="scm-deployment-card">
-      {item.image ? <img src={item.image} alt={`Smart City Media deployment in ${item.name}`} loading="lazy" /> : <div class="scm-deployment-placeholder" aria-label={`${item.name} photograph pending`} />}
+    {responsiveDeployments.map(item => <figure class="scm-deployment-card">
+      {item.optimized ? <GalleryImage src={item.image!} alt={`Smart City Media deployment in ${item.name}`} caption={item.name} width={item.width} height={item.height}>
+      <picture style="display:contents">
+        <source media="(min-width: 1024px)" type="image/avif" srcset={item.optimized.desktopAvifSrcset} sizes={carouselSizes} />
+        <source media="(min-width: 1024px)" type="image/webp" srcset={item.optimized.desktopWebpSrcset} sizes={carouselSizes} />
+        <source type="image/avif" srcset={item.optimized.avifSrcset} sizes={carouselSizes} />
+        <img src={item.optimized.fallback} srcset={item.optimized.webpSrcset} sizes={carouselSizes} width={item.width} height={item.height} alt={`Smart City Media deployment in ${item.name}`} loading="lazy" />
+      </picture></GalleryImage> : <div class="scm-deployment-placeholder" aria-label={`${item.name} photograph pending`} />}
       <figcaption><span>{item.name}</span></figcaption>
     </figure>)}
   </div>
@@ -32,12 +71,13 @@ const deployments = [
     </div>
   </div>
 </deployment-carousel>
+</PortfolioGallery>
 <script>
   class DeploymentCarousel extends HTMLElement {
     connectedCallback() {
       const track = this.querySelector<HTMLElement>('.scm-deployment-track')!;
       const cards = Array.from(track.querySelectorAll<HTMLElement>('.scm-deployment-card'));
-      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>('button'));
+      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>('.scm-carousel-controls button'));
       const position = this.querySelector('.scm-carousel-position')!;
       const update = () => {
         const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 1;

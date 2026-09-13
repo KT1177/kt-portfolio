@@ -1,14 +1,15 @@
 ---
+import AwardImage from './AwardImage.astro';
+import PhotographicHero from './PhotographicHero.astro';
 import CapabilityPills from '../ui/CapabilityPills.astro';
 import VideoCTA from '../ui/VideoCTA.astro';
 import DeploymentCarousel from './DeploymentCarousel.astro';
 import ChapterHeader from '../ui/ChapterHeader.astro';
-import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section id="smart-city-media" class="chapter">
       <div class="scm-editorial">
         <div class="scm-photographic-hero dark">
-          <img src={smartCityUrl("JC-kiosk-city.webp") ?? "/images/media-placeholder.svg"} alt="" loading="lazy" decoding="async"/>
+          <PhotographicHero file="JC-kiosk-city.webp" alt="" />
           <div class="chapter-copy scm-introduction">
             <ChapterHeader number="03" date="2015" descriptor="THE PLATFORM SCALES" layout="editorial" />
             <h2>Smart City Media</h2>
@@ -22,7 +23,7 @@ import { smartCityUrl } from '../../data/smart-city-media';
         <div class="proof-row scm-proof">
           <div class="stat"><strong>1,000</strong><span>Outdoor screens<small>At peak</small></span></div>
           <div class="scm-edison">
-            <img src={smartCityUrl("edison-gold-award.webp") ?? "/images/media-placeholder.svg"} alt="Edison Awards Gold badge" loading="lazy" decoding="async"/>
+            <AwardImage file="edison-gold-award.webp" alt="Edison Awards Gold badge" />
             <div>
               <p class="eyebrow">Gold Edison Award</p>
               <p>Collective Disruption</p>

@@ -1,4 +1,6 @@
 ---
+import PhotographicHero from './PhotographicHero.astro';
+import SupportingPhoto from './SupportingPhoto.astro';
 import CapabilityPills from '../ui/CapabilityPills.astro';
 import ChapterHeader from '../ui/ChapterHeader.astro';
 import VideoCTA from '../ui/VideoCTA.astro';
@@ -7,7 +9,7 @@ import { smartCityUrl } from '../../data/smart-city-media';
 <section id="citysafe" class="chapter" aria-labelledby="citysafe-heading">
       <div class="citysafe-hero dark">
         <div class="citysafe-backdrop">
-          <img src={smartCityUrl("call-box-city.webp") ?? "/images/media-placeholder.svg"} alt="A red New York City emergency call box with fire and police buttons on a street at dusk" loading="lazy" decoding="async"/>
+          <PhotographicHero file="call-box-city.webp" alt="A red New York City emergency call box with fire and police buttons on a street at dusk" />
         </div>
         <div class="citysafe-content">
           <div class="citysafe-editorial">
@@ -28,7 +30,7 @@ import { smartCityUrl } from '../../data/smart-city-media';
           <CapabilityPills class="citysafe-capabilities" label="CitySafe capabilities" items={['TWO-WAY COMMUNICATION', 'EMERGENCY SERVICES', 'CAMERAS', 'SENSORS', 'LOCAL INFORMATION', 'COMMUNITY']} />
         </div>
         <div class="citysafe-story-panel">
-          <div class="citysafe-image-frame"><img class="citysafe-concept-photo" src={smartCityUrl("citysafe-nyc-hero.webp") ?? "/images/media-placeholder.svg"} alt="CitySafe emergency touchscreen integrated into a New York City phone booth near Penn Station" width="1067" height="1600" loading="lazy" decoding="async"/></div>
+          <div class="citysafe-image-frame"><SupportingPhoto file="citysafe-nyc-hero.webp" alt="CitySafe emergency touchscreen integrated into a New York City phone booth near Penn Station" class="citysafe-concept-photo" /></div>
           <div class="citysafe-action citysafe-video-action">
             <VideoCTA label="WATCH CITYSAFE STORY" title="CitySafe film coming soon" fullWidth />
           </div>

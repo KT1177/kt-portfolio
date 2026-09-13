@@ -1,0 +1,10 @@
+---
+import { getImage } from 'astro:assets';
+interface Props { alt: string; }
+const { alt } = Astro.props;
+const src='https://pub-e185fd1db9bf4dd59d2b99be455217bd.r2.dev/smart-city/ada-sapolin.png';
+// The scoped portfolio service encodes this PNG as genuinely lossless WebP.
+const widths=[768,1000];
+const variants=await Promise.all(widths.map(async width=>({width,image:await getImage({src,width,height:Math.ceil(width*762/1000),fit:'inside',format:'webp'})})));
+---
+<img src={variants[variants.length - 1].image.src} srcset={variants.map(v=>`${v.image.src} ${v.width}w`).join(', ')} sizes="136.48294px" width="1000" height="762" style="aspect-ratio:1000/762" alt={alt} loading="lazy" decoding="async" />

@@ -1,0 +1,17 @@
+---
+import { getImage } from 'astro:assets';
+import { smartCityUrl } from '../../data/smart-city-media';
+const awards = {
+  'edison-gold-award.webp': {width:1000,height:853,sizes:'clamp(96px, 12vw, 160px)'},
+  'smart-50.webp': {width:749,height:1000,sizes:'125.832px'},
+  'idc-gold.webp': {width:667,height:1000,sizes:'104.3188px'},
+  'edison-gold.webp': {width:563,height:1000,sizes:'135.12px'},
+  'cleantech.webp': {width:1000,height:928,sizes:'(max-width: 600px) min(calc((100vw - 3rem - 1.25rem) / 2), 159.31035px), 159.31035px'},
+};
+interface Props { file:keyof typeof awards; alt:string; }
+const {file,alt} = Astro.props, config=awards[file], src=file === 'edison-gold-award.webp' ? smartCityUrl('edison-gold-award.webp') : 'https://pub-e185fd1db9bf4dd59d2b99be455217bd.r2.dev/smart-city/'+file;
+// Generous resolution for fine award lettering; full source canvas, no trim or flatten.
+const widths=(file === 'idc-gold.webp' || file === 'edison-gold.webp' ? [384,config.width] : [384,512,config.width]).filter((v,i,a)=>v<=config.width&&a.indexOf(v)===i);
+const variants=src ? await Promise.all(widths.map(async width=>({width,src:width===config.width ? src : (await getImage({src,width,height:Math.ceil(width*config.height/config.width),fit:'inside',format:'webp',quality:100})).src}))) : [];
+---
+<img src={src ?? '/images/media-placeholder.svg'} srcset={src ? variants.map(v=>`${v.src} ${v.width}w`).join(', ') : undefined} sizes={src ? config.sizes : undefined} width={config.width} height={config.height} style={`aspect-ratio:${config.width}/${config.height}`} alt={alt} loading="lazy" decoding="async" />

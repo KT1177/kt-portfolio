@@ -1,0 +1,51 @@
+---
+/** Shared gallery scope. Individual GalleryImage lightbox props override this default. */
+interface Props { lightbox?: boolean; label?: string; }
+const { lightbox = true, label = 'Portfolio photographs' } = Astro.props;
+---
+<portfolio-gallery data-lightbox={String(lightbox)} data-label={label} style="display:contents">
+  <slot />
+  <template data-lightbox-template>
+    <dialog class="portfolio-lightbox" aria-label={label}>
+      <button class="portfolio-lightbox-close" type="button" aria-label="Close photograph" autofocus>×</button>
+      <button class="portfolio-lightbox-prev" type="button" aria-label="Previous photograph">←</button>
+      <div class="portfolio-lightbox-stage">
+        <div class="portfolio-lightbox-image"></div>
+        <p class="portfolio-lightbox-caption"></p>
+        <p class="portfolio-lightbox-status" role="status" aria-live="polite"></p>
+        <button class="portfolio-lightbox-retry" type="button" hidden>Try again</button>
+      </div>
+      <button class="portfolio-lightbox-next" type="button" aria-label="Next photograph">→</button>
+    </dialog>
+  </template>
+</portfolio-gallery>
+<script>
+  import './portfolio-lightbox';
+</script>
+<style is:global>
+  .portfolio-lightbox { position:fixed;inset:0;margin:0;width:100%;max-width:none;height:100%;height:100dvh;max-height:none;padding:0;border:0;background:rgba(9,10,11,.98);color:#f5f3ef;overscroll-behavior:contain; }
+  .portfolio-lightbox::backdrop { background:#090a0b; }
+  .portfolio-lightbox[open] { display:flex;align-items:center;justify-content:center; }
+  .portfolio-lightbox button { display:grid;place-items:center;width:48px;height:48px;border:1px solid #ffffff35;border-radius:50%;background:#101112b3;color:inherit;font:28px/1 system-ui;cursor:pointer;z-index:1; }
+  .portfolio-lightbox button:focus-visible { outline:2px solid white;outline-offset:5px; }
+  .portfolio-lightbox button[hidden] { display:none; }
+  .portfolio-lightbox-close { position:absolute;right:max(24px,env(safe-area-inset-right));top:max(20px,env(safe-area-inset-top)); }
+  .portfolio-lightbox-prev { position:absolute;left:20px;top:calc(50% - 24px); }
+  .portfolio-lightbox-next { position:absolute;right:20px;top:calc(50% - 24px); }
+  .portfolio-lightbox-stage { width:100%;height:100%;padding:80px 88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;box-sizing:border-box;touch-action:pan-y pinch-zoom; }
+  .portfolio-lightbox-image { display:contents; }
+  .portfolio-lightbox .portfolio-lightbox-image img { display:block;width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 200px);object-fit:contain;aspect-ratio:auto;flex-shrink:1;min-height:0; }
+  .portfolio-lightbox .portfolio-lightbox-image img[hidden] { display:none; }
+  .portfolio-lightbox-caption { margin:0;max-width:65ch;text-align:center;font:14px/1.5 system-ui;color:#d5d2cc; }
+  .portfolio-lightbox-status { margin:0;text-align:center;font:14px/1.5 system-ui; }
+  .portfolio-lightbox-status:empty,.portfolio-lightbox-caption:empty { display:none; }
+  .portfolio-lightbox .portfolio-lightbox-retry { width:auto;height:auto;padding:12px 22px;border-radius:4px;font-size:15px; }
+  @media (max-width:700px) {
+    .portfolio-lightbox-stage { padding:76px 12px 104px;gap:12px; }
+    .portfolio-lightbox .portfolio-lightbox-image img { max-height:calc(100dvh - 228px); }
+    .portfolio-lightbox-close { right:max(16px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top)); }
+    .portfolio-lightbox-prev,.portfolio-lightbox-next { top:auto;bottom:max(24px,env(safe-area-inset-bottom)); }
+    .portfolio-lightbox-prev { left:calc(50% - 64px); }
+    .portfolio-lightbox-next { right:calc(50% - 64px); }
+  }
+</style>

@@ -1,8 +1,8 @@
 ---
+import SupportingPhoto from './SupportingPhoto.astro';
 import CapabilityPills from '../ui/CapabilityPills.astro';
 import ChapterHeader from '../ui/ChapterHeader.astro';
 import VideoCTA from '../ui/VideoCTA.astro';
-import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section id="city247" class="chapter dark city247" aria-labelledby="city247-heading">
   <div class="city247-case-study">
@@ -14,7 +14,7 @@ import { smartCityUrl } from '../../data/smart-city-media';
     </header>
     <figure class="city247-union-square">
       <div class="city247-union-media">
-        <img src={smartCityUrl("247-interface.webp") ?? "/images/media-placeholder.svg"} alt="Jennifer Faulk interacting with the City24/7 touchscreen in Union Square" loading="lazy" decoding="async" />
+        <SupportingPhoto file="247-interface.webp" alt="Jennifer Faulk interacting with the City24/7 touchscreen in Union Square" />
         <div class="city247-media-footer">
           <VideoCTA label="WATCH UNION SQUARE STORY" />
           <div class="city247-pilot"><strong>11</strong><span>INTERACTIVE KIOSKS<small>NEW YORK CITY PILOT</small></span></div>

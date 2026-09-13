@@ -1,0 +1,13 @@
+---
+/** Slot contains the existing responsive card image. src is fetched only on opening. */
+interface Props { src: string; alt: string; caption?: string; width?: number; height?: number; lightbox?: boolean; }
+const { src, alt, caption = '', width, height, lightbox } = Astro.props;
+---
+<button type="button" class="portfolio-gallery-image" data-full-src={src} data-full-alt={alt} data-caption={caption} data-width={width} data-height={height} data-lightbox={lightbox === undefined ? undefined : String(lightbox)} aria-label={`View photograph: ${alt}`} aria-haspopup="dialog" disabled>
+  <slot />
+</button>
+<style>
+  .portfolio-gallery-image { display:block;width:100%;padding:0;margin:0;border:0;border-radius:0;background:transparent;color:inherit;text-align:inherit;line-height:0;cursor:zoom-in; }
+  .portfolio-gallery-image:disabled { cursor:default; }
+  .portfolio-gallery-image:focus-visible { outline:3px solid currentColor;outline-offset:-3px; }
+</style>

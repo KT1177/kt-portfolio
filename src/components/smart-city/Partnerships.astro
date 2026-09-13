@@ -1,6 +1,6 @@
 ---
+import SupportingPhoto from './SupportingPhoto.astro';
 import ChapterHeader from '../ui/ChapterHeader.astro';
-import { smartCityUrl } from '../../data/smart-city-media';
 ---
 <section id="partnerships" class="partnerships dark">
       <div class="section-heading">
@@ -10,11 +10,11 @@ import { smartCityUrl } from '../../data/smart-city-media';
       </div>
       <div class="partnership-grid">
         <figure class="partner-photo">
-          <img src={smartCityUrl("reno-screen.webp") ?? "/images/media-placeholder.svg"} alt="Lamar interactive airport screen in Reno installation" loading="lazy" decoding="async"/>
+          <SupportingPhoto file="reno-screen.webp" alt="Lamar interactive airport screen in Reno installation" />
           <figcaption><strong>Lamar</strong><span>AIRPORT EXPERIENCE</span></figcaption>
         </figure>
         <figure class="partner-photo">
-          <img src={smartCityUrl("chicago-jcd-citypost.webp") ?? "/images/media-placeholder.svg"} alt="JCDecaux CityPost information kiosk on a Chicago street" loading="lazy" decoding="async"/>
+          <SupportingPhoto file="chicago-jcd-citypost.webp" alt="JCDecaux CityPost information kiosk on a Chicago street" />
           <figcaption><strong>JCDecaux</strong><span>CHICAGO INTERACTIVE BUS SHELTERS</span></figcaption>
         </figure>
       </div>

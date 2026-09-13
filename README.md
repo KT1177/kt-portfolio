@@ -16,6 +16,14 @@ pnpm preview
 
 The static build is written to `dist/`. No deployment is configured yet.
 
+## Portfolio image quality standard
+
+Follow the [permanent portfolio image standard](docs/portfolio-image-standard.md) for all future page work. Cloudflare R2 remains the master media source, high-quality WebP is the preferred uploaded photographic master, and Astro handles responsive delivery. Visual fidelity takes priority over byte savings; use visually approved high-quality AVIF with WebP fallback and preserve creative crop control.
+
+The Smart City opening hero and 13 Section 03 carousel photographs are established references. The carousel uses AVIF 70 / WebP 85, an 800px desktop-only floor from 1024px viewport width, the existing mobile/tablet ladder, and useful native-width candidates. Other image categories require separate authorization.
+
+Portfolio galleries should normally enable the [shared optional lightbox](docs/portfolio-lightbox.md), which supports gallery defaults and per-image overrides and loads full-size photography only when opened.
+
 ## Structure
 
 - `src/layouts/BaseLayout.astro`: shared document, metadata, header and footer.

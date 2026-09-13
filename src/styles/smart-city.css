@@ -52,7 +52,7 @@
 .smart-city-page .stat>strong { font-size:clamp(3rem,6vw,6rem);font-weight:500;line-height:1;letter-spacing:-.05em; }
 .smart-city-page .city247-photo-caption { margin-top:1rem;font-size:.875rem; }
 .smart-city-page .scm-photographic-hero { padding:7rem 7vw; }
-.smart-city-page .scm-photographic-hero>img { position:absolute;inset:0;z-index:-2; }
+.smart-city-page .scm-photographic-hero>picture>img,.smart-city-page .scm-photographic-hero>img { position:absolute;inset:0;z-index:-2; }
 .smart-city-page .scm-introduction { max-width:39rem; }
 .smart-city-page .scm-proof { padding:3rem 7vw;display:flex;justify-content:space-between;gap:3rem;flex-wrap:wrap; }
 .smart-city-page .scm-edison { display:flex;gap:1.5rem;align-items:center;font-size:.875rem; }
@@ -146,7 +146,7 @@
 .smart-city-page :is(.city247-photo-frame>img,.polevolt-feature-photo img,.partner-photo img) { height:auto;aspect-ratio:auto;object-fit:contain;object-position:var(--sc-image-position); }
 .smart-city-page .polevolt-feature-photo { aspect-ratio:auto; }
 .smart-city-page .citysafe-patent-panel img { height:auto;max-height:24rem;object-fit:contain; }
-.smart-city-page :is(.hero-backdrop img,.citysafe-backdrop img,.scm-photographic-hero>img,.citypost-scene img,.closing-background img) { height:100%;object-fit:var(--sc-image-fit);object-position:var(--sc-image-position); }
+.smart-city-page :is(.hero-backdrop img,.citysafe-backdrop img,.scm-photographic-hero>img,.scm-photographic-hero>picture>img,.citypost-scene img,.closing-background img) { height:100%;object-fit:var(--sc-image-fit);object-position:var(--sc-image-position); }
 .smart-city-page .hero-backdrop figure { width:100%;height:100%; }
 .smart-city-page .hero { --sc-image-position:60% center; }
 .smart-city-page :is(.citysafe-hero,.closing) { --sc-image-position:65% center; }
@@ -439,7 +439,7 @@
 .smart-city-page #city247 .city247-summary { max-width:45rem;font-size:1.125rem;line-height:1.7; }
 .smart-city-page #city247 .city247-union-square { margin-top:2rem; }
 .smart-city-page #city247 .city247-union-media { position:relative; }
-.smart-city-page #city247 .city247-union-media>img { width:100%;height:auto;object-fit:contain; }
+.smart-city-page #city247 .city247-union-media img { width:100%;height:auto;object-fit:contain; }
 .smart-city-page #city247 .city247-media-footer {
   position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;align-items:end;
   gap:1.5rem;padding:4rem 1.75rem 1.5rem;
