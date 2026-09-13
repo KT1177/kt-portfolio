@@ -1,9 +1,14 @@
 ---
+import DocumentViewer from '../ui/DocumentViewer.astro';
 import ChapterHeader from '../ui/ChapterHeader.astro';
 const recommendations = [
-  { logo: 'dart-logo.svg', pdf: 'DART-KT-Reco.pdf', organization: 'DART', quote: '“Karl played a pivotal role in the creation of DART’s CityPost real-time transit alerts platform. His work ensured seamless API integration of daily and emergency notifications across our 600-screen network, both system-wide and regionally.”', name: 'Taty Benavidez', title: 'Manager, Customer Information and Production', attribution: 'Dallas Area Rapid Transit' },
-  { logo: 'greensboro-logo.svg', pdf: 'GB-KT-Reco.pdf', organization: 'City of Greensboro', quote: '“Karl consistently demonstrates outstanding responsiveness to our team’s content and application requests, tailoring the platform to meet Greensboro’s unique needs.”', name: 'Rodney Roberts, CGCIO', title: 'Chief Information Officer', attribution: 'City of Greensboro' },
-  ...Array.from({length:6}, (_,i) => ({logo: '', pdf: '', organization: `Recommendation ${i+3}`, quote: '', name: '', title: '', attribution: ''})),
+  { logo: 'dart-logo.svg', pdf: 'DART-KT-Reco.pdf', documentTitle: 'DART Recommendation', organization: 'DART', quote: '“Karl played a pivotal role in the creation of DART’s CityPost real-time transit alerts platform. His work ensured seamless API integration of daily and emergency notifications across our 600-screen network, both system-wide and regionally.”', name: 'Taty Benavidez', title: 'Manager, Customer Information and Production', attribution: 'Dallas Area Rapid Transit' },
+  { logo: 'greensboro-logo.svg', pdf: 'GB-KT-Reco.pdf', documentTitle: 'City of Greensboro Recommendation', organization: 'City of Greensboro', quote: '“Karl consistently demonstrates outstanding responsiveness to our team’s content and application requests, tailoring the platform to meet Greensboro’s unique needs.”', name: 'Rodney Roberts, CGCIO', title: 'Chief Information Officer', attribution: 'City of Greensboro' },
+  {"organization": "CITY OF AURORA", "quote": "“We chose Smart City Media based on their experience and service ethic.”", "name": "Michael Pegues", "title": "Chief Information Officer", "attribution": "City of Aurora, Illinois", "pdf": "Aurora Reference SCM.pdf", "documentTitle": "City of Aurora Recommendation", "logo": "cityofaurora_logo_seal_coated_color.svg", "logoAlt": "City of Aurora"},
+  {"organization": "CITY OF JERSEY CITY", "quote": "“Smart City Media has been a fantastic partner for us.”", "name": "Brian D. Platt", "title": "Business Administrator", "attribution": "City of Jersey City, New Jersey", "pdf": "JC Smart City Media Letter of Support final.pdf", "documentTitle": "Jersey City Recommendation", "logo": "JC_logo.svg", "logoAlt": "City of Jersey City"},
+  {"organization": "KC STREETCAR", "quote": "“Smart City Media has been a primary partner in our overall Smart City initiative and they have added real public-facing value to our transit deployments.”", "name": "Tom Gerend", "title": "Executive Director", "attribution": "Kansas City Streetcar Authority", "pdf": "KC Streetcar Reference SCM.pdf", "documentTitle": "KC Streetcar Recommendation", "logo": "KCStreetcar%20Brandmark.svg", "logoAlt": "KC Streetcar"},
+  {"organization": "CITY OF LITTLE ROCK", "quote": "“Citizens and visitors alike are excited to have updated information on community activities available for review.”", "name": "Mark Stodola", "title": "Mayor", "attribution": "City of Little Rock, Arkansas", "pdf": "Little Rock Reference SCM.pdf", "documentTitle": "City of Little Rock Recommendation", "logo": "LittleRock_Logo.svg", "logoAlt": "City of Little Rock"},
+  {"organization": "KANSAS CITY", "quote": "“SCM is actually trying to connect your communities.”", "name": "Sylvester “Sly” James", "title": "Former Mayor", "attribution": "Kansas City, Missouri", "pdf": "Sly James Reference SCM.pdf", "documentTitle": "Sly James Recommendation", "logo": "kc_logo.svg", "logoAlt": "Kansas City"},
 ];
 const base = 'https://pub-e185fd1db9bf4dd59d2b99be455217bd.r2.dev/smart-city/';
 const awards = [
@@ -22,15 +27,15 @@ const awards = [
     </div>
     <recommendation-carousel>
       <div class="recommendation-track" tabindex="0" aria-label="Recommendations, horizontally scrollable">
-        {recommendations.map((recommendation, index) => <article class="recommendation-card" aria-label={`${recommendation.organization}${index > 1 ? ", content pending" : ""}`}>
-          <div class="recommendation-logo-placeholder">{recommendation.logo ? <img class="recommendation-logo" src={base + recommendation.logo} alt={`${recommendation.organization} logo`} loading="lazy" decoding="async" /> : 'Organization pending'}</div>
-          <p class="recommendation-excerpt">{recommendation.quote || 'Approved recommendation pending.'}</p>
-          <div class="recommendation-attribution"><p><strong>{recommendation.name || 'Name pending'}</strong></p><p>{recommendation.title || 'Title pending'}</p><p>{recommendation.attribution || 'Organization pending'}</p></div>
-          {recommendation.pdf ? <a class="recommendation-letter" href={base + 'smart-city-pdfs/' + recommendation.pdf} target="_blank" rel="noopener noreferrer" aria-label={`View ${recommendation.organization} recommendation letter (PDF, opens in new tab)`}>VIEW LETTER →</a> : <span class="recommendation-letter" aria-disabled="true">VIEW LETTER → <small>PDF pending</small></span>}
+        {recommendations.map((recommendation) => <article class="recommendation-card" aria-label={recommendation.organization}>
+          <div class="recommendation-logo-placeholder">{recommendation.logo ? <img class="recommendation-logo" src={base + recommendation.logo} alt={'logoAlt' in recommendation ? recommendation.logoAlt : `${recommendation.organization} logo`} loading="lazy" decoding="async" /> : recommendation.organization && <span class="recommendation-identity">{recommendation.organization}</span>}</div>
+          <p class="recommendation-excerpt">{recommendation.quote || <><span>Recommendation to come</span><br />Approved quotation will appear here.</>}</p>
+          <div class="recommendation-attribution"><p><strong>{recommendation.name || 'Name pending'}</strong></p>{recommendation.title && <p>{recommendation.title}</p>}{recommendation.attribution && <p>{recommendation.attribution}</p>}</div>
+          {recommendation.pdf ? <button type="button" class="recommendation-letter" data-document-url={base + 'smart-city-pdfs/' + encodeURIComponent(recommendation.pdf)} data-document-title={recommendation.documentTitle} aria-haspopup="dialog">VIEW LETTER →</button> : <span class="recommendation-letter" aria-disabled="true">LETTER TO COME</span>}
         </article>)}
       </div>
       <div class="recommendation-controls">
-        <span aria-live="polite" class="recommendation-position">01 / 08</span>
+        <span aria-live="polite" class="recommendation-position">01 / {String(recommendations.length).padStart(2, '0')}</span>
         <button type="button" data-step="-1" aria-label="Previous recommendation" disabled>←</button>
         <button type="button" data-step="1" aria-label="Next recommendation">→</button>
       </div>
@@ -46,18 +51,20 @@ const awards = [
     </div>
   </div>
 </section>
+<DocumentViewer />
 <script>
   class RecommendationCarousel extends HTMLElement {
     private observer?: ResizeObserver;
     connectedCallback() {
       const track = this.querySelector<HTMLElement>('.recommendation-track')!;
       const cards = Array.from(track.querySelectorAll<HTMLElement>('.recommendation-card'));
-      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>('button'));
+      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>('button[data-step]'));
       const position = this.querySelector('.recommendation-position')!;
       const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
       const update = () => {
-        const index = Math.min(cards.length - 1, Math.round(track.scrollLeft / step()));
-        position.textContent = `${String(index + 1).padStart(2,'0')} / 08`;
+        const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 1;
+        const index = atEnd ? cards.length - 1 : Math.min(cards.length - 1, Math.round(track.scrollLeft / step()));
+        position.textContent = `${String(index + 1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
         buttons[0].disabled = track.scrollLeft <= 1;
         buttons[1].disabled = track.scrollLeft >= track.scrollWidth-track.clientWidth-1;
       };

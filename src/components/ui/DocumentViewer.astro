@@ -1,0 +1,102 @@
+<dialog class="portfolio-document" aria-labelledby="portfolio-document-title">
+  <div class="document-shell">
+    <span id="portfolio-document-title" class="document-accessible-text">Recommendation</span><button type="button" data-close aria-label="Close document">×</button>
+    <div class="document-pages"><p class="document-status" role="status">Loading document…</p><canvas aria-label="Recommendation document page" role="img"></canvas><div class="document-accessible-text"></div></div>
+    <footer hidden><button type="button" data-previous aria-label="Previous page">←</button><span class="document-count" aria-live="polite">Loading</span><button type="button" data-next aria-label="Next page">→</button></footer>
+  </div>
+</dialog>
+<style>
+ .portfolio-document { border:0;padding:0;margin:auto;width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;background:transparent;color:#fff;overflow:auto; }
+.portfolio-document::backdrop { background:rgba(0,0,0,.88); }
+.document-shell { position:relative;width:min(62rem,calc(100% - 112px));margin:48px auto; }
+.document-shell button { width:2.5rem;height:2.5rem;background:transparent;border:0;color:inherit;cursor:pointer; }
+.document-shell [data-close] { position:fixed;top:8px;right:max(12px,calc((100vw - 62rem)/2 - 44px));font:300 2rem/1 Arial,sans-serif; }
+.document-shell button:disabled { opacity:.3;cursor:default; }
+.document-shell button:focus-visible { outline:2px solid currentColor;outline-offset:2px; }
+.document-pages { padding:0 16px; }
+.document-pages canvas { display:block;max-width:100%;height:auto;margin:auto;background:white;box-shadow:0 3px 20px rgba(0,0,0,.22); }
+.document-pages canvas[hidden],.document-shell footer[hidden] { display:none; }
+.document-shell footer { display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:12px;font-size:.8rem;color:rgba(255,255,255,.75); }
+.document-accessible-text { position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%); }
+@media (max-width:768px) {
+  .document-shell { width:100%;margin:52px auto 24px; }
+  .document-shell [data-close] { right:8px; }
+}
+</style>
+<script>
+import type { PDFDocumentProxy, PDFDocumentLoadingTask, RenderTask } from 'pdfjs-dist';
+const dialog = document.querySelector<HTMLDialogElement>('.portfolio-document')!;
+const canvas = dialog.querySelector('canvas')!;
+const status = dialog.querySelector<HTMLElement>('.document-status')!;
+const count = dialog.querySelector('.document-count')!;
+const navigation = dialog.querySelector('footer')!;
+const previous = dialog.querySelector<HTMLButtonElement>('[data-previous]')!;
+const next = dialog.querySelector<HTMLButtonElement>('[data-next]')!;
+let pdf: PDFDocumentProxy | undefined;
+let loadingTask: PDFDocumentLoadingTask | undefined;
+let pageNumber = 1;
+let generation = 0;
+let render: RenderTask | undefined;
+let trigger: HTMLElement | undefined;
+let oldOverflow = '';
+async function draw() {
+  if (!pdf) return;
+  const version = ++generation;
+  render?.cancel();
+  try { await render?.promise; } catch {}
+  if (version !== generation || !pdf) return;
+  const page = await pdf.getPage(pageNumber);
+  if (version !== generation) return;
+  const unscaled = page.getViewport({scale:1});
+  const width = Math.max(240, dialog.querySelector('.document-pages')!.clientWidth - 32);
+  const scale = width / unscaled.width;
+  const ratio = window.devicePixelRatio || 1;
+  const viewport = page.getViewport({scale:scale*ratio});
+  canvas.width = viewport.width; canvas.height = viewport.height;
+  canvas.style.width = `${viewport.width/ratio}px`;
+  canvas.style.height = `${viewport.height/ratio}px`;
+  canvas.hidden = false;
+  render = page.render({canvas,viewport});
+  try { await render.promise; } catch { return; }
+  if (version !== generation) return;
+  status.hidden = true;
+  navigation.hidden = pdf.numPages <= 1;
+  count.textContent = `${pageNumber} / ${pdf.numPages}`;
+  previous.disabled = pageNumber === 1; next.disabled = pageNumber === pdf.numPages;
+  const text = await page.getTextContent();
+  if (version === generation) dialog.querySelector('.document-accessible-text')!.textContent = text.items.map(item => 'str' in item ? item.str : '').join(' ');
+}
+document.addEventListener('click', async event => {
+  const button = (event.target as Element).closest<HTMLElement>('[data-document-url]');
+  if (!button) return;
+  trigger = button;
+  const version = ++generation;
+  dialog.querySelector('#portfolio-document-title')!.textContent = button.dataset.documentTitle!;
+  status.textContent = 'Loading document…';status.hidden = false;canvas.hidden = true;
+  navigation.hidden = true;
+  count.textContent = 'Loading'; previous.disabled = next.disabled = true;
+  oldOverflow = document.body.style.overflow;document.body.style.overflow = 'hidden';
+  dialog.showModal();
+  try {
+    const pdfjs = await import('pdfjs-dist');
+    const worker = await import('pdfjs-dist/build/pdf.worker.min.mjs?url');
+    pdfjs.GlobalWorkerOptions.workerSrc = worker.default;
+    const task = pdfjs.getDocument({url:button.dataset.documentUrl!});
+    loadingTask = task;
+    const documentPdf = await task.promise;
+    if (version !== generation) { await task.destroy(); return; }
+    pdf = documentPdf;pageNumber = 1;await draw();
+  } catch (error) {
+    console.error('Document viewer could not load PDF:', error instanceof Error ? error.message : String(error));
+    if (dialog.open && version <= generation) { status.textContent = 'This document could not be loaded. Please close and try again.';status.hidden = false;count.textContent = 'Unavailable'; }
+  }
+});
+previous.onclick = () => { if (pdf && pageNumber > 1) { pageNumber--;void draw(); } };
+next.onclick = () => { if (pdf && pageNumber < pdf.numPages) { pageNumber++;void draw(); } };
+dialog.querySelector<HTMLButtonElement>('[data-close]')!.onclick = () => dialog.close();
+dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+dialog.addEventListener('keydown', event => { if (event.key === 'ArrowLeft') {event.preventDefault();previous.click();} if (event.key === 'ArrowRight') {event.preventDefault();next.click();} });
+dialog.addEventListener('close', () => { generation++;render?.cancel();void loadingTask?.destroy();pdf=undefined;document.body.style.overflow=oldOverflow;trigger?.focus(); });
+let resizeTimer: ReturnType<typeof setTimeout>;
+window.addEventListener('resize', () => { clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(dialog.open && pdf) void draw();},150); });
+</script>

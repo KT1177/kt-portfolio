@@ -1,13 +1,26 @@
 ---
 import { smartCityUrl } from '../../data/smart-city-media';
-// Add confirmed deployments here in their supplied order.
-const deployments = [{ name: 'Jersey City', image: smartCityUrl('JC-kiosk-city.webp') }];
+const deployments = [
+  { name: 'Dallas DART, Texas', image: smartCityUrl('Citypost-Hero-DART.webp') },
+  { name: 'Dallas DART, Texas', image: smartCityUrl('Citypost-Hero-DART-2.webp') },
+  { name: 'Greensboro, North Carolina', image: smartCityUrl('Citypost-Hero-GB.webp') },
+  { name: 'Greensboro, North Carolina', image: smartCityUrl('Citypost-Hero-GB-1.webp') },
+  { name: 'Kansas City Streetcar, Missouri', image: smartCityUrl('Citypost-Hero-KC-Streetcar.webp') },
+  { name: 'Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-KC-Bus-1.webp') },
+  { name: 'Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-KC-Bus.webp') },
+  { name: 'Aurora, Illinois', image: smartCityUrl('Citypost-Hero-Aurora.webp') },
+  { name: 'Louisville, Kentucky', image: smartCityUrl('Citypost-Hero-Louisville.webp') },
+  { name: 'Milwaukee, Wisconsin', image: smartCityUrl('Citypost-Hero-MKE.webp') },
+  { name: 'Montgomery County, Maryland', image: smartCityUrl('Citypost-Hero-Moco.webp') },
+  { name: 'Torrance, California', image: smartCityUrl('Citypost-Hero-Torrance-Station.webp') },
+  { name: 'UMKC / Kansas City, Missouri', image: smartCityUrl('Citypost-Hero-UMKC.webp') },
+];
 ---
 <deployment-carousel class="scm-deployments">
   <div class="scm-deployment-track" tabindex="0" aria-label="City deployments, horizontally scrollable">
     {deployments.map(item => <figure class="scm-deployment-card">
       {item.image ? <img src={item.image} alt={`Smart City Media deployment in ${item.name}`} loading="lazy" /> : <div class="scm-deployment-placeholder" aria-label={`${item.name} photograph pending`} />}
-      <figcaption><span>{item.name}</span><span aria-hidden="true">↗</span></figcaption>
+      <figcaption><span>{item.name}</span></figcaption>
     </figure>)}
   </div>
   <div class="scm-carousel-footer">
@@ -28,7 +41,8 @@ const deployments = [{ name: 'Jersey City', image: smartCityUrl('JC-kiosk-city.w
       const position = this.querySelector('.scm-carousel-position')!;
       const update = () => {
         const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 1;
-        const index = Math.min(cards.length - 1, Math.round(track.scrollLeft / step));
+        const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 1;
+        const index = atEnd ? cards.length - 1 : Math.min(cards.length - 1, Math.round(track.scrollLeft / step));
         position.textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
         buttons[0].disabled = track.scrollLeft <= 1;
         buttons[1].disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 1;

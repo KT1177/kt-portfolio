@@ -13,6 +13,20 @@ export const smartCityMedia = {
   'polevolt-web.webp': 'smart-city/polevolt-web.webp',
   'chicago-jcd-citypost.webp': 'smart-city/chicago-jcd-citypost.webp',
   'reno-screen.webp': 'smart-city/reno-screen.webp',
+  'Citypost-Hero-JC.webp': 'smart-city/Citypost-Hero-JC.webp',
+  'Citypost-Hero-DART.webp': 'smart-city/Citypost-Hero-DART.webp',
+  'Citypost-Hero-DART-2.webp': 'smart-city/Citypost-Hero-DART-2.webp',
+  'Citypost-Hero-KC-Streetcar.webp': 'smart-city/Citypost-Hero-KC-Streetcar.webp',
+  'Citypost-Hero-KC-Bus-1.webp': 'smart-city/Citypost-Hero-KC-Bus-1.webp',
+  'Citypost-Hero-KC-Bus.webp': 'smart-city/Citypost-Hero-KC-Bus.webp',
+  'Citypost-Hero-GB.webp': 'smart-city/Citypost-Hero-GB.webp',
+  'Citypost-Hero-GB-1.webp': 'smart-city/Citypost-Hero-GB-1.webp',
+  'Citypost-Hero-Aurora.webp': 'smart-city/Citypost-Hero-Aurora.webp',
+  'Citypost-Hero-Louisville.webp': 'smart-city/Citypost-Hero-Louisville.webp',
+  'Citypost-Hero-MKE.webp': 'smart-city/Citypost-Hero-MKE.webp',
+  'Citypost-Hero-Moco.webp': 'smart-city/Citypost-Hero-Moco.webp',
+  'Citypost-Hero-Torrance-Station.webp': 'smart-city/Citypost-Hero-Torrance-Station.webp',
+  'Citypost-Hero-UMKC.webp': 'smart-city/Citypost-Hero-UMKC.webp',
 } as const;
 
 export function smartCityUrl(name: keyof typeof smartCityMedia) {

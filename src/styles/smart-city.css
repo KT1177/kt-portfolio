@@ -324,8 +324,9 @@
 .smart-city-page #citysafe .citysafe-image-frame .citysafe-concept-photo {
   object-fit:cover;object-position:60% 18%;padding:0;
 }
+.smart-city-page #citysafe .citysafe-patent-panel .citysafe-image-frame { background:#fff; }
 .smart-city-page #citysafe .citysafe-patent-panel .citysafe-image-frame img {
-  object-fit:contain;object-position:center;padding:12px;
+  object-fit:contain;object-position:center;padding:0;
 }
 
 .smart-city-page #citysafe .citysafe-video-action { padding-block:0; }
@@ -665,7 +666,7 @@
 .smart-city-page #recognition .recognition-award-stage { height:15rem;display:flex;align-items:end;justify-content:center; }
 .smart-city-page #recognition .recognition-award-stage img { width:100%;height:var(--award-height);object-fit:contain;object-position:center bottom; }
 .smart-city-page #recognition .recognition-award--certificate { --award-height:6.5rem; }
-.smart-city-page #recognition .recognition-award--small { --award-height:8.5rem; }
+.smart-city-page #recognition .recognition-award--small { --award-height:9.775rem; }
 .smart-city-page #recognition .recognition-award--medium { --award-height:10.5rem; }
 .smart-city-page #recognition .recognition-award--tall { --award-height:15rem; }
 .smart-city-page #recognition .recognition-award figcaption { margin-top:1.25rem;min-height:3em;text-align:center;font-size:.75rem;line-height:1.5;color:#c2c5bf; }
@@ -693,7 +694,7 @@
   transform:translateY(var(--award-base-offset,0%));
 }
 .smart-city-page #recognition .recognition-award--medium { --award-base-offset:3.2%; }
-.smart-city-page #recognition .recognition-award--small { --award-base-offset:2.6%; }
+.smart-city-page #recognition .recognition-award--small { --award-base-offset:calc(2.6% + 4px); }
 .smart-city-page #recognition .recognition-award--tall { --award-base-offset:5.2%; }
 .smart-city-page #recognition .recognition-award--cleantech { --award-base-offset:1.400862%; }
 
@@ -719,3 +720,6 @@
 @media(max-width:700px) {
   .smart-city-page .epilogue-copy { padding-left:.75rem; }
 }
+
+.smart-city-page #recognition .recommendation-identity { font-size:.875rem;letter-spacing:.1em;line-height:1.5;text-transform:uppercase; }
+.smart-city-page #recognition button.recommendation-letter { padding:0;border:0;background:none;text-align:left;cursor:pointer; }
