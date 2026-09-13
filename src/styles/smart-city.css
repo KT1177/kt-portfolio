@@ -12,9 +12,9 @@
 .smart-city-page .desktop-nav { display:flex;gap:clamp(1rem,2.3vw,2.5rem);font-size:.875rem; }
 .smart-city-page [aria-current=page] { text-decoration:underline; }
 .smart-city-page .mobile-menu { display:none; }
-.smart-city-page h1 { font-size:clamp(3rem,6.2vw,7rem);line-height:1.02;letter-spacing:-.055em;font-weight:500; }
-.smart-city-page h2 { font-size:clamp(2.5rem,4.5vw,5rem);line-height:1.07;letter-spacing:-.045em;font-weight:500; }
-.smart-city-page h3 { font-size:clamp(1.6rem,2.5vw,2.8rem);line-height:1.2;letter-spacing:-.03em;font-weight:500;margin:1.5rem 0; }
+.smart-city-page h1 { font-size:clamp(3rem,6.2vw,7rem);line-height:1.02;letter-spacing:var(--headline-tracking-large);font-weight:500; }
+.smart-city-page h2 { font-size:clamp(2.5rem,4.5vw,5rem);line-height:1.07;letter-spacing:var(--headline-tracking-section);font-weight:500; }
+.smart-city-page h3 { font-size:clamp(1.6rem,2.5vw,2.8rem);line-height:1.2;letter-spacing:var(--headline-tracking-small);font-weight:500;margin:1.5rem 0; }
 .smart-city-page .eyebrow,.smart-city-page .chapter-meta { font-size:.875rem;line-height:1.5; }
 .smart-city-page .eyebrow { text-transform:uppercase;letter-spacing:.08em; }
 .smart-city-page .chapter-meta { display:flex;gap:2rem;align-items:start;margin-bottom:2.5rem; }
@@ -111,8 +111,8 @@
 }
 .smart-city-page :is(h1,h2,h3,blockquote) { text-wrap: balance; }
 .smart-city-page :is(h1,h2,h3) { font-weight:500; }
-.smart-city-page h1 { font-size:clamp(3rem, 6.7vw, 7.5rem);line-height:1.02;letter-spacing:-.055em; }
-.smart-city-page h2 { font-size:clamp(2.65rem, 5.25vw, 6rem);line-height:1.06;letter-spacing:-.045em; }
+.smart-city-page h1 { font-size:clamp(3rem, 6.7vw, 7.5rem);line-height:1.02;letter-spacing:var(--headline-tracking-large); }
+.smart-city-page h2 { font-size:clamp(2.65rem, 5.25vw, 6rem);line-height:1.06;letter-spacing:var(--headline-tracking-section); }
 .smart-city-page h3 { font-size:clamp(1.7rem, 2.8vw, 3rem);line-height:1.18;margin-block:clamp(1.5rem, 3vw, 3rem); }
 .smart-city-page :is(.hero-intro,.chapter-copy>p:not(.chapter-meta),.citysafe-support,.closing-support,.polevolt-summary) {
   max-width:var(--sc-copy);font-size:clamp(1.0625rem, 1.3vw, 1.25rem);line-height:1.75;text-wrap:pretty;
@@ -245,7 +245,7 @@
 
 /* CitySafe continuation: story, physical concept, and patent evidence. */
 .smart-city-page .citysafe-question>span { display:block; }
-.smart-city-page .citysafe-question { font-size:clamp(2.65rem,4.5vw,5rem);line-height:1.06;letter-spacing:-.045em;font-weight:500;text-wrap:balance; }
+.smart-city-page .citysafe-question { font-size:clamp(2.65rem,4.5vw,5rem);line-height:1.06;letter-spacing:var(--headline-tracking-section);font-weight:500;text-wrap:balance; }
 .smart-city-page #citysafe .citysafe-panels {
   grid-template-columns:minmax(0,44fr) minmax(0,28fr) minmax(0,28fr);
   gap:clamp(1.5rem,2.8vw,3rem);padding-block:clamp(3.5rem,5vw,5.5rem);align-items:start;
@@ -661,7 +661,7 @@
 .smart-city-page #recognition .recommendation-controls button { width:2.25rem;height:2.25rem;border:1px solid #cccac1;cursor:pointer; }
 .smart-city-page #recognition .recommendation-controls button:disabled { opacity:.35;cursor:default; }
 .smart-city-page #recognition .recognition-awards { padding:2.5rem var(--sc-inset) 3rem;background:#111514;color:var(--sc-paper); }
-.smart-city-page #recognition .recognition-awards h3 { margin:0 0 2rem;font-size:1.5rem;line-height:1.475rem;font-weight:400;letter-spacing:0; }
+.smart-city-page #recognition .recognition-awards h3 { margin:0 0 2rem;font-size:1.5rem;line-height:1.475rem;font-weight:400;letter-spacing:var(--headline-tracking-small); }
 .smart-city-page #recognition .recognition-award-grid { display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(1.25rem,3vw,3rem); }
 .smart-city-page #recognition .recognition-award-stage { height:15rem;display:flex;align-items:end;justify-content:center; }
 .smart-city-page #recognition .recognition-award-stage img { width:100%;height:var(--award-height);object-fit:contain;object-position:center bottom; }
@@ -711,7 +711,7 @@
 }
 .smart-city-page .smart-city-epilogue h2 {
   font-size:clamp(2rem,3.1vw,3.5rem);line-height:1.16;font-weight:400;
-  letter-spacing:-.035em;text-wrap:pretty;
+  letter-spacing:var(--headline-tracking-section);text-wrap:pretty;
 }
 .smart-city-page .smart-city-epilogue p {
   margin-top:1.75rem;max-width:43rem;
