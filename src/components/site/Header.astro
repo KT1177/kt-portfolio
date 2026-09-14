@@ -1,13 +1,71 @@
 ---
-import Container from '../ui/Container.astro';
-import { navigation } from '../../data/navigation';
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+import { navigation, activeNavigationSection, type NavigationSection } from '../../data/navigation';
+interface Props { activeSection?: NavigationSection; }
+const activePath = Astro.props.activeSection ?? activeNavigationSection(Astro.url.pathname);
 ---
-<header class="border-b border-ink/15 py-6">
-  <Container class="flex flex-wrap items-center justify-between gap-6">
-    <a href="/" class="text-2xl font-semibold tracking-tight" aria-label="KT Portfolio home">KT<span class="text-accent">.</span></a>
-    <nav aria-label="Main navigation" class="flex flex-wrap gap-5 text-sm sm:gap-8">
-      {navigation.map(({ href, label }) => <a href={href} aria-current={path === (href.replace(/\/$/, '') || '/') ? 'page' : undefined} class="hover:text-accent aria-[current=page]:text-accent aria-[current=page]:underline underline-offset-8">{label}</a>)}
+<header class="site-header">
+  <a class="monogram" href="/" aria-label="KT — Creative Partner home">KT</a>
+  <nav class="desktop-nav" aria-label="Main navigation">
+    {navigation.map(({ href, label }) => (
+      <a href={href} aria-current={activePath === href ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+  <details class="mobile-menu">
+    <summary>Menu <span aria-hidden="true">☰</span></summary>
+    <nav aria-label="Mobile navigation">
+      {navigation.map(({ href, label }) => (
+        <a href={href} aria-current={activePath === href ? 'page' : undefined}>{label}</a>
+      ))}
     </nav>
-  </Container>
+  </details>
 </header>
+
+<style>
+  /* Single shared portfolio navigation; desktop and mobile use the same data. */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.15rem clamp(1.5rem, 6vw, 7rem);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+  }
+  a { color: inherit; text-underline-offset: .3em; }
+  a:hover, a[aria-current="page"] { text-decoration: underline; }
+  .monogram { font-size: 2rem; font-weight: 700; letter-spacing: -.09em; }
+  .desktop-nav { display: flex; gap: clamp(1rem, 1.7vw, 2rem); }
+  .desktop-nav, .mobile-menu summary, .mobile-menu nav {
+    font-size: .875rem;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .mobile-menu { display: none; }
+  summary { cursor: pointer; list-style: none; padding: .5rem; }
+  summary::-webkit-details-marker { display: none; }
+  summary:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+  .mobile-menu nav {
+    position: absolute;
+    right: 0;
+    top: 3rem;
+    z-index: 10;
+    min-width: 17rem;
+    background: var(--sc-paper, var(--color-paper));
+    border: 1px solid #c0c8c1;
+    padding: 1rem;
+    box-shadow: 0 1rem 2rem #0002;
+  }
+  .mobile-menu nav a { display: block; padding: .7rem; }
+  @media (max-width: 1100px) {
+    .desktop-nav { display: none; }
+    .mobile-menu { display: block; position: relative; }
+  }
+  @media (max-width: 900px) {
+    .mobile-menu nav { min-width: 15rem; }
+  }
+  @media (max-width: 600px) {
+    .site-header { padding-inline: 1.5rem; }
+    .mobile-menu nav { min-width: min(17rem, calc(100vw - 3rem)); }
+  }
+</style>

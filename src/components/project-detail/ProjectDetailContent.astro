@@ -1,0 +1,56 @@
+---
+import Container from '../ui/Container.astro';
+import ProjectImage from './ProjectImage.astro';
+import type { ProjectDetailData } from './types';
+interface Props { project: ProjectDetailData; }
+const { project } = Astro.props;
+const info = project.information;
+for (const href of [project.href, project.next.href]) {
+  if (!href.startsWith('/') || href.startsWith('//') || href.includes('#')) throw new Error('Projects require real internal page URLs.');
+}
+---
+<article class="project-detail">
+  <Container class="project-intro">
+    <header>
+      {project.logo ? <div class="brand-logo"><img src={project.logo.src} alt={project.client} width={project.logo.width} height={project.logo.height} decoding="async" /></div> : <p class="client-name">{project.client}</p>}
+      <h1>{project.title}</h1>
+    </header>
+    <section aria-labelledby="project-story-title" class="project-story">
+      <h2 id="project-story-title" class="label">Project Story</h2>
+      {project.story.map(paragraph => <p>{paragraph}</p>)}
+    </section>
+    <dl class="project-information">
+      <div><dt>Role</dt><dd>{info.role}</dd></div>
+      <div><dt>{info.organization.label}</dt><dd>{info.organization.value}</dd></div>
+      <div><dt>Recognition</dt><dd>{info.recognition}</dd></div>
+      <div><dt>Discipline</dt><dd>{info.discipline}</dd></div>
+    </dl>
+  </Container>
+  <div class="project-images">
+    {project.images.map(image => <ProjectImage image={image} />)}
+  </div>
+  <a class="next-project" href={project.next.href}>
+    <ProjectImage image={project.next.image} />
+    <Container class="next-label"><span class="label">Next Project</span><h2>{project.next.title}</h2></Container>
+  </a>
+</article>
+<style>
+  .project-detail { background:var(--color-paper);color:var(--color-ink);font-family:var(--font-sans); }
+  .project-detail :global(.project-intro) { padding-block:3rem; }
+  .brand-logo { width:10rem;height:4rem;display:flex;align-items:center;justify-content:flex-start;margin-bottom:1.5rem; }
+  .brand-logo img { max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain; }
+  .client-name { margin-bottom:1.5rem; }
+  h1 { font-size:clamp(2.5rem,8vw,3.5rem);font-weight:500;line-height:1.1; }
+  .project-story { margin-top:2.5rem; }
+  .label, dt { font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase; }
+  .project-story p { margin-top:1rem;line-height:1.65; }
+  .project-information { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;margin-top:2rem; }
+  dd { margin-top:.5rem;line-height:1.5;overflow-wrap:anywhere; }
+  .project-images { display:grid;gap:.5rem; }
+  .next-project { display:block;margin-top:.5rem;color:inherit;text-decoration:none; }
+  .next-project:focus-visible { outline:2px solid currentColor;outline-offset:-2px; }
+  .next-project :global(.next-label) { padding-block:1.5rem 2.5rem; }
+  .next-project h2 { margin-top:.5rem;font-size:2rem;line-height:1.15;font-weight:500; }
+  /* Holding layout only: wide-screen art direction is intentionally not designed yet. */
+  @media (min-width:768px) { .project-detail { max-width:48rem;margin-inline:auto; } }
+</style>

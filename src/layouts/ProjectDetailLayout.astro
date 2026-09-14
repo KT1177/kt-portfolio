@@ -1,0 +1,10 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ProjectDetailContent from '../components/project-detail/ProjectDetailContent.astro';
+import type { ProjectDetailData } from '../components/project-detail/types';
+interface Props { project: ProjectDetailData; }
+const { project } = Astro.props;
+---
+<BaseLayout title={project.title} description={project.description} activeSection={project.navigationSection}>
+  <slot><ProjectDetailContent project={project} /></slot>
+</BaseLayout>

@@ -1,0 +1,937 @@
+---
+// One ordered source keeps the capability index and editorial sections in sync.
+// Strategic links use existing parent pages until their specific collections are available.
+const sections = [
+  { id: 'brands-campaigns', name: 'Brands + Campaigns', headline: 'Brands people remember.', description: 'Distinctive identities, campaigns, and design systems that make a lasting impression.', icon: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z', placeholders: ['Brand identity', 'Campaign expression', 'Design in context'], href: '/advertising/', columns: 3 },
+  { id: 'healthcare-creative', icon: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6z', name: 'Healthcare Creative', headline: 'Clear ideas. Meaningful impact.', description: 'Healthcare and pharmaceutical advertising that brings clarity and human understanding to complex brands.', placeholders: ['Healthcare campaigns — Lyrica, Lipitor, Celebrex, Eliquis'], href: '/advertising/', columns: 1 },
+  { id: 'design-motion', name: 'Design + Motion', icon: 'M3 4h18v16H3z M10 8l6 4-6 4z', headline: 'Design with a life of its own.', description: 'Graphic, book, editorial, and identity design—brought into motion through animation, motion graphics, and animated campaigns.', placeholders: ['Graphic / identity design', 'Book / editorial design', 'Motion / animation'], href: '#design-motion-visual', columns: 3 },
+  { id: 'connected-experiences', name: 'Technology + Experiences', headline: 'Connect the physical and digital.', icon: 'M5 5h5v5H5z M14 14h5v5h-5z M10 7h7v7 M7 10v7h7', description: 'Smart City, digital out-of-home, and interactive public experiences—connecting environments with software and publishing systems.', placeholders: ['Smart City / connected public experiences'], href: '/smart-city/', columns: 1 },
+  { id: 'products-innovation', name: 'Products + Innovation', headline: 'Give the next idea form.', icon: 'M12 2l9 5v10l-9 5-9-5V7z M3 7l9 5 9-5 M12 12v10', description: 'LifeSaving Technologies: conceiving, designing, and bringing physical products and systems into the real world.', placeholders: ['LifeSaving Technologies / products + systems'], href: '/venture-lab/', columns: 1 },
+  { id: 'retail-environments', name: 'Retail + Environments', headline: 'Bring the brand into the room.', icon: 'M3 9h18l-2-6H5z M5 9v12h14V9 M9 21v-8h6v8', placeholders: ['Retail / environment'], description: 'Luxury retail, environmental graphics, production design, and physical brand systems—from in-store experience to final execution.', href: '#retail-environments-visual', columns: 1 },
+  { id: 'presentations-sales', name: 'Presentations + Sales', headline: 'Ideas that open doors.', description: 'Presentations, pitch decks, and sales tools that make complex ideas clear and inspire action.', icon: 'M4 14h3v7H4z M10 9h3v12h-3z M16 3h3v18h-3z', placeholders: ['Presentation / sales story'], href: '#presentations-sales-visual', columns: 1 },
+  { id: 'platforms-ai', name: 'Platforms + AI', headline: 'Build what makes more possible.', description: 'Platforms, workflows, and AI-assisted tools that turn creative thinking into working systems.', icon: 'M12 2l10 5-10 5L2 7z M2 12l10 5 10-5 M2 17l10 5 10-5', placeholders: ['Platform / workflow'], href: '#platforms-ai-visual', columns: 1 },
+];
+const capabilityLabels = [
+  ['Brands +', 'Campaigns'],
+  ['Healthcare', 'Creative'],
+  ['Design +', 'Motion'],
+  ['Technology +', 'Experiences'],
+  ['Products +', 'Innovation'],
+  ['Retail +', 'Environments'],
+  ['Presentations +', 'Sales'],
+  ['Platforms +', 'AI'],
+];
+const capabilities = sections.map((section, index) => ({ ...section, labelLines: capabilityLabels[index] }));
+---
+<div class="creative-partner-page" id="top">
+<section class="wrap hero" aria-labelledby="hero-title">
+  <div>
+    <p class="eyebrow">KARL TURKEL</p>
+    <h1 id="hero-title">Creative<br />Partner.</h1>
+    <p class="hero-statement">Many creative leaders manage the work. I build it.</p>
+  </div>
+</section>
+<section class="capabilities-section" aria-labelledby="capabilities-title">
+  <div class="wrap">
+    <h2 id="capabilities-title">Where I can help.</h2>
+    <nav class="capability-links" aria-label="Creative capabilities">
+      {capabilities.map((capability) => (
+        <a href={`#${capability.id}`} aria-label={capability.name}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={capability.icon} /></svg>
+          <span class="capability-label">{capability.labelLines.map((line) => <span class="capability-label-line">{line}</span>)}</span>
+        </a>
+      ))}
+    </nav>
+  </div>
+</section>
+<div id="showcase">
+  {sections.map((capability, index) => (
+    <section id={capability.id} class="portfolio-section" aria-labelledby={`${capability.id}-title`}>
+      <div class="wrap portfolio-grid">
+        <div class="portfolio-copy">
+          <p class="portfolio-label"><span>{String(index + 1).padStart(2, '0')}</span><span aria-hidden="true">—</span>{capability.name}</p>
+          {capability.id === 'design-motion' && <p class="portfolio-label">Editable placeholder copy</p>}
+          <h2 id={`${capability.id}-title`}>{capability.headline}</h2>
+          <p class="portfolio-description">{capability.description}</p>
+          <a class="view-work" href={capability.href}>VIEW WORK <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="portfolio-artwork">
+        {capability.id === 'brands-campaigns' && <span id="digital-content" class="capability-target" aria-hidden="true"></span>}
+        <div id={`${capability.id}-visual`} class="portfolio-visuals" style={`--visual-columns: ${capability.columns}`} tabindex="-1" aria-label={`${capability.name} portfolio imagery placeholders`}>
+          {capability.placeholders.map((label, imageIndex) => (
+            <div class="portfolio-placeholder">
+              <span class="visual-index">{String(imageIndex + 1).padStart(2, '0')}</span>
+              <span>{label}</span>
+              <small>Portfolio imagery to come</small>
+            </div>
+          ))}
+        </div>
+        </div>
+      </div>
+    </section>
+  ))}
+</div>
+<section class="section engagement" aria-labelledby="engagement-title">
+<div class="wrap">
+<div class="section-intro">
+<h2 id="engagement-title">The right fit<br>for the moment.</h2>
+</div>
+<div class="models">
+<article class="model">
+<h3>Project</h3>
+<p>A focused brief, a clear deliverable, and a partner to take it from idea to done.</p>
+</article>
+<article class="model">
+<h3>Retainer</h3>
+<p>Ongoing creative capacity for the steady stream of work your business needs.</p>
+</article>
+<article class="model">
+<h3>Fractional / Embedded</h3>
+<p>Senior creative leadership and hands-on collaboration as an extension of your team.</p>
+</article>
+</div>
+</div>
+</section>
+<section id="contact" class="contact" aria-labelledby="contact-title">
+<div class="wrap">
+<div>
+<p class="eyebrow">Let’s make something happen.</p>
+<h2 id="contact-title">What are you<br>working on?</h2>
+<p>A pitch, a launch, a backlog, or an idea that needs a way forward. Let’s start there.</p>
+</div>
+<div>
+<a class="button" href="/contact/">Start a conversation ↗</a>
+</div>
+</div>
+</section>
+</div>
+
+<style>
+  .creative-partner-page {
+    --white:#FDFDFC;
+    --cream:#F5F4EF;
+    --taupe:#E4D6CB;
+    --paper:var(--cream);
+    --ink:#30342D;
+    --muted:#65645E;
+    --line:#D5D1C8;
+    --wash:var(--cream);
+    --accent:var(--taupe);
+    --max:1240px;
+  }
+  * {
+    box-sizing:border-box;
+  }
+  .creative-partner-page {
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    line-height:1.5;
+  }
+  a {
+    color:inherit;
+    text-underline-offset:5px;
+  }
+  button {
+    font:inherit;
+  }
+  a:focus-visible,button:focus-visible,summary:focus-visible {
+    outline:3px solid #667b2f;
+    outline-offset:5px;
+  }
+  .wrap {
+    width:min(var(--max),calc(100% - 96px));
+    margin:auto;
+  }
+  .eyebrow,.number,.caption,.tag {
+    font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+  }
+  .eyebrow {
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 24px;
+  }
+  .hero {
+    padding:80px 0 75px;
+    display:grid;
+    grid-template-columns:1.7fr 1fr;
+    gap:80px;
+    align-items:end;
+  }
+  h1,h2,h3,p {
+    margin-top:0;
+  }
+  h1 {
+    font-size:clamp(55px,7.7vw,104px);
+    font-weight:500;
+    line-height:.98;
+    letter-spacing:var(--headline-tracking-large);
+    margin-bottom:30px;
+  }
+  h2 {
+    font-weight:500;
+    letter-spacing:var(--headline-tracking-section);
+    line-height:1.1;
+    font-size:clamp(34px,4.2vw,56px);
+    margin-bottom:24px;
+  }
+  h3 {
+    font-weight:500;
+    font-size:25px;
+    line-height:1.15;
+    letter-spacing:var(--headline-tracking-small);
+  }
+  .hero h2 {
+    font-size:clamp(25px,3vw,39px);
+    line-height:1.18;
+    max-width:670px;
+  }
+  .hero-aside {
+    padding-bottom:8px;
+  }
+  .hero-aside p {
+    color:var(--muted);
+    max-width:340px;
+    font-size:17px;
+  }
+  .actions {
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-top:30px;
+  }
+  .button {
+    display:inline-block;
+    background:var(--ink);
+    color:var(--paper);
+    padding:13px 21px;
+    text-decoration:none;
+    font-size:13px;
+    border:1px solid var(--ink);
+    cursor:pointer;
+  }
+  .text-link {
+    font-size:13px;
+  }
+  .section {
+    padding:64px 0;
+    border-top:1px solid var(--line);
+  }
+  .section-intro {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    margin-bottom:35px;
+  }
+  .capabilities-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 35px;
+  }
+  .capabilities-intro p {
+    max-width: 44rem;
+    color: var(--muted);
+  }
+  .section-intro p {
+    max-width:470px;
+    color:var(--muted);
+  }
+  .capabilities {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+  }
+  .cap {
+    border-top:2px solid var(--ink);
+    padding-top:16px;
+  }
+  .number {
+    color:var(--muted);
+    display:block;
+    margin-bottom:34px;
+  }
+  .cap h3 {
+    font-size:29px;
+  }
+  .cap p {
+    color:var(--muted);
+    font-size:14px;
+  }
+  .engagement {
+    background:var(--wash);
+  }
+  .models {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:36px;
+  }
+  .model {
+    border-left:1px solid #a7ab9e;
+    padding-left:23px;
+  }
+  .model p {
+    font-size:14px;
+    max-width:290px;
+    color:var(--muted);
+  }
+  .tag {
+    display:block;
+    margin-top:26px;
+    text-transform:uppercase;
+  }
+  .showcase-intro {
+    padding:85px 0 40px;
+  }
+  .showcase-intro h2 {
+    font-size:clamp(45px,6vw,76px);
+  }
+  .index {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 20px;
+    padding:20px 0;
+    border-top:1px solid var(--line);
+    font-size:12px;
+  }
+  .index a {
+    color:var(--muted);
+  }
+  .work {
+    padding:56px 0 65px;
+    border-top:1px solid var(--line);
+  }
+  .work-heading {
+    display:grid;
+    grid-template-columns:52px 1.3fr 1fr;
+    gap:20px;
+    align-items:start;
+    margin-bottom:28px;
+  }
+  .work-heading .number {
+    margin:5px 0;
+  }
+  .work-heading h2 {
+    font-size:30px;
+    margin-bottom:0;
+  }
+  .work-heading p {
+    color:var(--muted);
+    font-size:14px;
+    margin:0;
+  }
+  .placeholder {
+    border:1px dashed #a6ab9a;
+    background:linear-gradient(135deg,transparent calc(50% - .5px),#bcc0b244 50%,transparent calc(50% + .5px)),var(--wash);
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:24px;
+    gap:9px;
+  }
+  .placeholder b {
+    font-size:15px;
+    font-weight:500;
+    max-width:270px;
+  }
+  .placeholder small {
+    font-family:ui-monospace,monospace;
+    color:var(--muted);
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .caption {
+    margin:12px 0 0;
+    color:var(--muted);
+    letter-spacing:0;
+    font-size:10px;
+  }
+  .split {
+    display:grid;
+    grid-template-columns:1.65fr 1fr;
+    gap:22px;
+  }
+  .deck {
+    aspect-ratio:16/9;
+  }
+  .stack {
+    display:grid;
+    grid-template-rows:1fr 1fr;
+    gap:18px;
+  }
+  .stack .placeholder {
+    min-height:115px;
+  }
+  .social {
+    display:grid;
+    grid-template-columns:1fr 1fr .72fr 1fr;
+    gap:20px;
+    align-items:center;
+  }
+  .social .placeholder {
+    aspect-ratio:1/1;
+  }
+  .social .portrait {
+    aspect-ratio:9/16;
+  }
+  .dark {
+    background:#30342d;
+    color:var(--paper);
+  }
+  .dark .work-heading p,.dark .number,.dark .caption {
+    color:#c0c5b8;
+  }
+  .dark .placeholder {
+    background:#41473b;
+    border-color:#828a77;
+  }
+  .dark .placeholder small {
+    color:#bbc3b0;
+  }
+  .film {
+    aspect-ratio:21/9;
+    min-height:240px;
+  }
+  .play {
+    font-size:35px;
+    line-height:1;
+    border:1px solid #838d78;
+    border-radius:50%;
+    width:65px;
+    height:65px;
+    display:grid;
+    place-items:center;
+    padding-left:4px;
+    margin-bottom:12px;
+  }
+  .filmstrip {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:18px;
+  }
+  .filmstrip .placeholder {
+    min-height:105px;
+  }
+  .retail {
+    display:grid;
+    grid-template-columns:1fr 1.45fr;
+    gap:24px;
+  }
+  .retail>.placeholder {
+    min-height:350px;
+  }
+  .mechanicals {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    padding:25px;
+    border:1px solid var(--line);
+  }
+  .mechanicals .placeholder {
+    min-height:140px;
+    background-color:#eeeee7;
+  }
+  .brand {
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:50px;
+    align-items:center;
+  }
+  .book-stage {
+    background:var(--wash);
+    padding:35px;
+    display:flex;
+    justify-content:center;
+  }
+  .book {
+    width:220px;
+    aspect-ratio:2/3;
+    background-color:var(--paper);
+    box-shadow:9px 9px 0 #c9ccbf;
+  }
+  .logos {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .logos .placeholder {
+    min-height:120px;
+    background:none;
+  }
+  .browser {
+    border:1px solid var(--line);
+    padding:12px;
+    background:#edeee7;
+  }
+  .browser-bar {
+    font-family:ui-monospace,monospace;
+    font-size:10px;
+    color:var(--muted);
+    padding:0 4px 12px;
+  }
+  .web-layout {
+    display:grid;
+    grid-template-columns:1fr 220px;
+    gap:26px;
+    align-items:end;
+  }
+  .browser .placeholder {
+    min-height:320px;
+  }
+  .phone {
+    border:1px solid #a6ab9a;
+    border-radius:24px;
+    padding:12px;
+  }
+  .phone .placeholder {
+    min-height:310px;
+    border-radius:14px;
+  }
+  .tech {
+    display:grid;
+    grid-template-columns:.7fr 1.15fr 1fr;
+    gap:30px;
+    align-items:center;
+  }
+  .signage {
+    aspect-ratio:9/16;
+    max-height:400px;
+  }
+  .tech .placeholder {
+    min-height:220px;
+  }
+  .flow {
+    display:grid;
+    gap:12px;
+  }
+  .flow div {
+    padding:16px;
+    border:1px solid var(--line);
+    font-size:13px;
+  }
+  .flow .arrow {
+    border:0;
+    text-align:center;
+    padding:0;
+    color:var(--muted);
+  }
+  .platforms {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .platforms .placeholder {
+    min-height:240px;
+  }
+  .platforms h3 {
+    font-size:18px;
+    font-weight:500;
+    letter-spacing:var(--headline-tracking-small);
+    margin:16px 0 4px;
+  }
+  .platforms p {
+    font-size:12px;
+    color:var(--muted);
+  }
+  .ai-layout {
+    display:grid;
+    grid-template-columns:.75fr 2fr;
+    gap:30px;
+  }
+  .ai-layout>.placeholder {
+    background-color:var(--paper);
+  }
+  .outputs {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .outputs .placeholder {
+    min-height:245px;
+  }
+  .product {
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:22px;
+  }
+  .product>.placeholder {
+    min-height:360px;
+  }
+  .contact {
+    padding:85px 0;
+    background:var(--paper);
+    border-top:1px solid var(--line);
+  }
+  .contact .wrap {
+    display:grid;
+    grid-template-columns:1.6fr 1fr;
+    gap:50px;
+    align-items:center;
+  }
+  .contact h2 {
+    font-size:clamp(42px,5.3vw,68px);
+    max-width:650px;
+  }
+  .contact p {
+    max-width:470px;
+  }
+  @media(min-width:1450px) {
+    .hero {
+      gap:100px;
+    }
+  }
+  @media(max-width:950px) {
+    .wrap {
+      width:calc(100% - 48px);
+    }
+    .hero {
+      gap:35px;
+      grid-template-columns:1.5fr 1fr;
+    }
+    .capabilities {
+      grid-template-columns:repeat(2,1fr);
+    }
+    .work-heading {
+      grid-template-columns:35px 1fr;
+    }
+    .work-heading p {
+      grid-column:2;
+    }
+    .tech {
+      gap:18px;
+    }
+    .brand {
+      gap:24px;
+    }
+    .outputs {
+      gap:10px;
+    }
+    .placeholder {
+      padding:18px;
+    }
+    .web-layout {
+      grid-template-columns:1fr 180px;
+    }
+  }
+  @media(max-width:640px) {
+    .wrap {
+      width:calc(100% - 36px);
+    }
+    .hero {
+      display:block;
+      padding:52px 0;
+    }
+    .hero-aside {
+      margin-top:30px;
+    }
+    .hero-aside p {
+      max-width:100%;
+    }
+    .section,.work {
+      padding:40px 0;
+    }
+    .section-intro {
+      display:block;
+      margin-bottom:24px;
+    }
+    .capabilities {
+      gap:24px 18px;
+    }
+    .cap h3 {
+      font-size:24px;
+    }
+    .number {
+      margin-bottom:23px;
+    }
+    .models {
+      grid-template-columns:1fr;
+      gap:28px;
+    }
+    .model p {
+      max-width:none;
+    }
+    .tag {
+      margin-top:12px;
+    }
+    .showcase-intro {
+      padding-top:50px;
+    }
+    .work-heading {
+      gap:12px;
+    }
+    .work-heading h2 {
+      font-size:27px;
+    }
+    .split,.retail,.brand,.web-layout,.tech,.ai-layout,.product,.contact .wrap {
+      grid-template-columns:1fr;
+    }
+    .stack {
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:auto;
+    }
+    .social {
+      grid-template-columns:1fr 1fr;
+      align-items:stretch;
+      gap:12px;
+    }
+    .social .portrait {
+      aspect-ratio:1/1.25;
+    }
+    .social .placeholder:last-child {
+      aspect-ratio:auto;
+    }
+    .film {
+      aspect-ratio:16/9;
+      min-height:210px;
+    }
+    .filmstrip {
+      gap:10px;
+    }
+    .filmstrip .placeholder {
+      padding:10px;
+      min-height:90px;
+    }
+    .filmstrip .placeholder b {
+      font-size:12px;
+    }
+    .retail>.placeholder {
+      min-height:260px;
+    }
+    .mechanicals {
+      padding:14px;
+      gap:12px;
+    }
+    .book-stage {
+      padding:25px;
+    }
+    .browser .placeholder {
+      min-height:220px;
+    }
+    .phone {
+      width:190px;
+      margin:0 auto;
+    }
+    .signage {
+      width:190px;
+      margin:auto;
+    }
+    .platforms {
+      grid-template-columns:1fr;
+      gap:26px;
+    }
+    .platforms .placeholder {
+      min-height:210px;
+    }
+    .outputs .placeholder {
+      min-height:170px;
+      padding:10px;
+    }
+    .outputs .placeholder b {
+      font-size:12px;
+    }
+    .product>.placeholder {
+      min-height:270px;
+    }
+    .contact {
+      padding:50px 0;
+    }
+    .contact .wrap {
+      gap:12px;
+    }
+    .caption {
+      line-height:1.6;
+    }
+  }
+  @media print {
+    .wrap {
+      width:92%;
+    }
+    .work,.section {
+      break-inside:avoid;
+    }
+    .dark {
+      background:#eee;
+      color:#222;
+    }
+    .dark .placeholder {
+      background:#ddd;
+    }
+  }
+  /* Approved palette: near white, original cream, light taupe, deep olive gray. */
+.capabilities-section,#social,#brand,#technology,#ai {
+    background:var(--cream);
+  }
+  .engagement:not(#technology) {
+    background:var(--paper);
+  }
+  #executive,#retail,#digital,#systems,#product {
+    background:var(--white);
+  }
+  .dark {
+    background:var(--ink);
+    color:var(--white);
+  }
+  .placeholder {
+    border-color:#BEB8AD;
+    background:linear-gradient(135deg,transparent calc(50% - .5px),#BEB8AD44 50%,transparent calc(50% + .5px)),var(--cream);
+  }
+  #social .placeholder,#brand .placeholder,#technology .placeholder,#ai .placeholder {
+    background-color:var(--white);
+  }
+  .dark .placeholder {
+    background:#3D413A;
+    border-color:#83877E;
+  }
+  .dark .placeholder small,.dark .work-heading p,.dark .number,.dark .caption {
+    color:#D5D6CE;
+  }
+  .play {
+    border-color:#83877E;
+  }
+  .mechanicals .placeholder,.browser,.book-stage {
+    background-color:var(--cream);
+  }
+  .book {
+    box-shadow:9px 9px 0 var(--taupe);
+  }
+  .logos .placeholder {
+    background:var(--white);
+  }
+  .model {
+    border-color:#BBAFA3;
+  }
+  .contact {
+    background:var(--paper);
+  }
+  a:focus-visible,button:focus-visible,summary:focus-visible {
+    outline-color:var(--ink);
+  }
+  @media print {
+    .dark {
+      background:#eee;
+      color:#222;
+    }
+    .dark .placeholder {
+      background:#ddd;
+    }
+  }
+  /* Page-specific theme also carries through the shared site header and footer. */
+:global(body.creative-partner-theme) {
+    --color-paper:#F5F4EF;
+    --color-ink:#30342D;
+    --color-accent:#30342D;
+  }
+  .creative-partner-page {
+    line-height:1.5;
+  }
+  .creative-partner-page section {
+    scroll-margin-top:24px;
+  }
+  .placeholder-label {
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .dark .placeholder-label {
+    color:#D5D6CE;
+  }
+  .work-heading h2 {
+    line-height:1.15;
+    letter-spacing:var(--headline-tracking-section);
+  }
+  .cap h3,.model h3 {
+    margin-bottom:24px;
+  }
+  .creative-partner-page p {
+    margin-bottom:16px;
+  }
+  .creative-partner-page .work-heading p {
+    margin-bottom:0;
+  }
+  .creative-partner-page .wrap > :last-child {
+    margin-bottom:0;
+  }
+  .placeholder {
+    overflow-wrap:anywhere;
+  }
+  .social > *, .outputs > *, .filmstrip > *, .stack > * {
+    min-width:0;
+  }
+  @media(max-width:380px) {
+    .capabilities,.outputs {
+      grid-template-columns:1fr;
+    }
+    .filmstrip {
+      grid-template-columns:1fr;
+    }
+    .stack {
+      grid-template-columns:1fr;
+    }
+  }
+
+  /* Editorial opening and seven-section structure; existing work studies retained separately. */
+  .hero { padding: 64px 0 72px; grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); align-items: first baseline; gap: 60px; }
+  .hero .eyebrow { font-family: inherit; font-size: 16.5px; line-height: 21px; letter-spacing: .15em; font-weight: 600; margin-bottom: 25px; position: relative; top: 10px; }
+  .hero h1 { font-size: clamp(72px, 8.8vw, 126px); font-weight: 700; letter-spacing: -.04em; line-height: .87; margin-bottom: 22px; color: #10110f; }
+  .hero .hero-statement { font-size: calc(clamp(17px, 1.65vw, 22px) + 2px); letter-spacing: -.025em; line-height: 1.45; max-width: 38rem; margin: 0; }
+
+
+
+  .capabilities-section { padding: 46px 0 40px; }
+  .capabilities-section h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 600; letter-spacing: -.045em; margin-bottom: 36px; }
+  .capability-links { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 18px; }
+  .capability-links a { display: flex; flex-direction: column; align-items: flex-start; gap: 21px; padding-top: 18px; border-top: 1px solid #a3a39a; text-decoration: none; font-size: 12px; line-height: 1.4; max-width: 100%; }
+  .capability-links a:hover { border-color: currentColor; text-decoration: underline; }
+  .capability-links .capability-label { font-size: 12px; font-weight: 400; line-height: 1.4; letter-spacing: normal; }
+  .capability-label-line { display: block; white-space: nowrap; }
+  .portfolio-section { background: var(--paper); padding: 28px 0; border-top: 1px solid var(--line); }
+  .portfolio-section-dark { background: #191c19; color: var(--white); }
+  .portfolio-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.3fr); gap: 48px; align-items: center; }
+  .portfolio-label { display: flex; gap: 10px; align-items: baseline; font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
+  .portfolio-copy h2 { font-size: clamp(32px, 3.2vw, 44px); letter-spacing: -.055em; line-height: 1.02; margin-bottom: 18px; max-width: 10ch; }
+  .portfolio-description { font-size: 14px; line-height: 1.5; max-width: 29ch; }
+  .view-work { display: inline-flex; gap: 14px; font-size: 10px; letter-spacing: .08em; padding-bottom: 5px; border-bottom: 1px solid; text-decoration: none; margin-top: 6px; }
+  .portfolio-visuals { display: grid; grid-template-columns: repeat(var(--visual-columns, 1), minmax(0, 1fr)); gap: 12px; min-height: 350px; scroll-margin-top: 24px; }
+  .portfolio-artwork { min-width: 0; }
+  .capability-target { display: block; scroll-margin-top: 24px; }
+  .portfolio-placeholder { display: flex; flex-direction: column; justify-content: end; padding: 22px; border: 1px solid #d1cec5; background: var(--white); font-size: 18px; letter-spacing: -.03em; }
+  .portfolio-placeholder .visual-index { margin-bottom: auto; font-size: 10px; letter-spacing: .1em; opacity: .65; }
+  .portfolio-placeholder small { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; margin-top: 10px; opacity: .65; }
+  .portfolio-section-dark .portfolio-placeholder { background: #292e29; border-color: #474d45; }
+  .portfolio-section-dark .portfolio-placeholder:nth-child(2) { background: #373d35; }
+  @media(max-width: 950px) {
+    .hero { gap: 32px; }
+
+    .capability-links { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .portfolio-grid { gap: 26px; grid-template-columns: 1fr 1.7fr; }
+    .portfolio-placeholder { padding: 14px; font-size: 15px; }
+  }
+  @media(max-width: 640px) {
+    .hero { display: grid; grid-template-columns: 1fr; padding: 42px 0 44px; gap: 30px; }
+    .hero h1 { font-size: clamp(72px, 16vw, 102px); }
+
+
+
+    .capabilities-section { padding: 34px 0; }
+    .capability-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .portfolio-grid { grid-template-columns: 1fr; gap: 26px; }
+    .portfolio-copy h2 { max-width: 16ch; }
+    .portfolio-description { max-width: 36ch; }
+    .portfolio-section { padding: 34px 0; }
+    .portfolio-visuals { min-height: 292px; }
+    .portfolio-visuals { gap: 8px; }
+    .portfolio-placeholder { padding: 12px 9px; overflow-wrap: anywhere; font-size: 14px; }
+    .portfolio-placeholder small { font-size: 8px; }
+  }
+
+</style>
